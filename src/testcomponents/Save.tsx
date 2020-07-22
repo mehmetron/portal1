@@ -14,7 +14,7 @@ export default function Save() {
 
   useEffect(() => {
     const query = async () => {
-      const apiCall = await fetch(`http://127.0.0.1:8000/api/lead`);
+      const apiCall = await fetch(`http://127.0.0.1:8000/kafka/api/lead`);
       const user = await apiCall.json();
       setContacts([...user]);
     };

@@ -9,7 +9,7 @@ export default function Dashboard() {
   const [state, setState] = useState([]);
   useEffect(() => {
     const query = async () => {
-      const apiCall = await fetch(`http://127.0.0.1:8000/api/lead`);
+      const apiCall = await fetch(`http://127.0.0.1:8000/kafka/api/lead`);
       const user = await apiCall.json();
       setState([...user]);
     };
@@ -17,7 +17,7 @@ export default function Dashboard() {
   }, []);
 
   const create = () => {
-    fetch(`http://127.0.0.1:8000/snippets/2`, {
+    fetch(`http://127.0.0.1:8000/kafka/snippets/2`, {
       method: "DELETE",
       headers: {
         "X-CSRFTOKEN": Cookies.get("csrftoken"),
