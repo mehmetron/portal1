@@ -7,6 +7,7 @@ import BoardList from "./features/board/BoardList";
 import Navbar from "./components/Navbar";
 import Home from "./features/home/Home";
 import BoardBar from "./features/board/BoardBar";
+import LessonPage from "./features/lesson/LessonPage";
 // import Profile from "./features/profile/Profile";
 import Sidebar from "./features/sidebar/Sidebar";
 // import PageError from "./components/PageError";
@@ -55,6 +56,10 @@ const AuthenticatedApp = () => {
 
       <AppRoute exact path="/kafka/home">
         <Home />
+      </AppRoute>
+
+      <AppRoute exact path="/kafka/lesson">
+        <LessonPage />
       </AppRoute>
       {/* <Route path="*">
         <PageError>Page not found.</PageError>

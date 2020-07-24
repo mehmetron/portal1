@@ -111,6 +111,9 @@ const DrawerContent = () => {
         <NavLink to="/kafka/boards/" exact css={linkStyles}>
           Boards
         </NavLink>
+        <NavLink to="/kafka/lesson/" exact css={linkStyles}>
+          Lessons
+        </NavLink>
         {/* <NavLink to="/kafka/profile/" exact css={linkStyles}>
           Profile
         </NavLink> */}
