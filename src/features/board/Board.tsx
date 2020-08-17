@@ -16,6 +16,7 @@ import { updateTasksByColumn } from "../task/TaskSlice";
 import { updateColumns, columnSelectors } from "../column/ColumnSlice";
 import { useParams } from "react-router-dom";
 import { fetchBoardById } from "./BoardSlice";
+import { fetchAllLabels } from "../label/LabelSlice";
 import Spinner from "../../components/Spinner";
 import { barHeight, sidebarWidth } from "../../const";
 import PageError from "../../components/PageError";
@@ -65,6 +66,7 @@ const Board = () => {
   React.useEffect(() => {
     if (id) {
       dispatch(fetchBoardById(id));
+      dispatch(fetchAllLabels());
     }
   }, [id]);
 

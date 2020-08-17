@@ -118,7 +118,7 @@ const BoardList = () => {
   const dispatch = useDispatch();
   const loading = useSelector((state: RootState) => state.board.fetchLoading);
   const boards = useSelector((state: RootState) => state.board.all);
-  const userId = useSelector((state: RootState) => state.auth.user?.id);
+  // const userId = useSelector((state: RootState) => state.auth.user?.id);
 
   React.useEffect(() => {
     dispatch(fetchAllBoards());
@@ -142,7 +142,8 @@ const BoardList = () => {
                 key={board.id}
                 cardCss={boardCardStyles}
                 to={`/kafka/b/${board.id}`}
-                isOwner={board.owner === userId}
+                isOwner={true}
+                // isOwner={board.owner === userId}
               >
                 {board.name}
               </Card>

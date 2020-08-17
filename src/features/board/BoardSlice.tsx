@@ -2,7 +2,7 @@ import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { Board, IColumn, ITask, Label, NanoBoard } from "../../types";
 import api, { API_BOARDS } from "../../api";
 import { RootState } from "../../store";
-import { logout } from "../auth/AuthSlice";
+// import { logout } from "../auth/AuthSlice";
 
 interface InitialState {
   detail: Board | null;
@@ -123,20 +123,19 @@ export const slice = createSlice({
       state.createError = action.payload as string;
       state.createLoading = false;
     });
-    builder.addCase(logout.fulfilled, (state) => {
-      state.all = [];
-      state.detail = null;
-    });
+    // builder.addCase(logout.fulfilled, (state) => {
+    //   state.all = [];
+    //   state.detail = null;
+    // });
   },
 });
 
 export const { setCreateDialogOpen } = slice.actions;
 
 export const currentBoardOwner = (state: RootState) => {
-  return (
-    Boolean(state.auth.user) &&
-    state.board.detail?.owner === state.auth.user?.id
-  );
+  return true;
+  // Boolean(state.auth.user) &&
+  // state.board.detail?.owner === state.auth.user?.id
 };
 
 export default slice.reducer;

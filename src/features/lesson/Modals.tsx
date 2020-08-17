@@ -1,6 +1,10 @@
 import React from "react";
 import Modal from "react-modal";
 
+import { useDispatch, useSelector } from "react-redux";
+import { setCreateDialogOpen } from "./LessonSlice";
+import { RootState } from "../../store";
+
 const customStyles = {
   content: {
     position: "absolute",
@@ -28,34 +32,46 @@ const customStyles = {
 Modal.setAppElement("#root");
 
 export default function Modals(props: { children: React.ReactNode }) {
-  // var subtitle;
-  const [modalIsOpen, setIsOpen] = React.useState(false);
-  function openModal() {
-    setIsOpen(true);
-  }
+  // // var subtitle;
+  // const [modalIsOpen, setIsOpen] = React.useState(false);
+  // function openModal() {
+  //   setIsOpen(true);
+  // }
 
-  function afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    // subtitle.style.color = "green";
-  }
+  // function afterOpenModal() {
+  //   // references are now sync'd and can be accessed.
+  //   // subtitle.style.color = "green";
+  // }
 
-  function closeModal() {
-    setIsOpen(false);
-  }
+  // function closeModal() {
+  //   setIsOpen(false);
+  // }
+
+  const dispatch = useDispatch();
+  // const error = useSelector((state: RootState) => state.lesson.createError);
+  const open = useSelector((state: RootState) => state.lesson.createDialogOpen);
+
+  const handleOpen = () => {
+    dispatch(setCreateDialogOpen(true));
+  };
+
+  const handleClose = () => {
+    dispatch(setCreateDialogOpen(false));
+  };
 
   return (
     <div>
-      <button onClick={openModal}>Open Modal</button>
+      <button onClick={handleOpen}>Open Modal</button>
       <Modal
-        isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
-        onRequestClose={closeModal}
+        isOpen={open}
+        // onAfterOpen={afterOpenModal}
+        onRequestClose={handleClose}
         // @ts-ignore
         style={customStyles}
         contentLabel="Example Modal"
       >
         {/* <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2> */}
-        <button onClick={closeModal}>close</button>
+        <button onClick={handleClose}>close</button>
         <div>I am a modal</div>
         <form>
           <input />

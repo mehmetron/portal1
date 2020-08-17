@@ -86,6 +86,13 @@ export interface Avatar {
   name: string;
 }
 
+export interface CurrentUser {
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+}
+
 export interface WithTheme {
   theme: Theme;
 }

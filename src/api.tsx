@@ -39,5 +39,7 @@ export const API_SORT_COLUMNS = "/kafka/api/sort/column/";
 export const API_SORT_TASKS = "/kafka/api/sort/task/";
 export const API_USERS = "/kafka/api/users/";
 export const API_SEARCH_USERS = "/kafka/api/u/search/";
+// Get current user
+export const API_CURRENT_USER = "/kafka/api/currentuser/";
 
 export default axios;

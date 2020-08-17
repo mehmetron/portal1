@@ -335,6 +335,7 @@ const EditTaskDialog = () => {
   };
 
   const handleLabelsChange = (newLabels: Label[]) => {
+    dispatch(createInfoToast("Beep boop... Updating label..."));
     dispatch(
       patchTask({
         id: taskId,

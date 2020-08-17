@@ -45,7 +45,7 @@
   },
   "scripts": {
     "start": "craco start",
-    "build": "craco build && mv ./build ../lern",
+    "build": "craco build && cd ../lern && rm -rf ./build && cd ../portal && mv ./build ../lern",
     "test": "craco test",
     "eject": "react-scripts eject"
   },

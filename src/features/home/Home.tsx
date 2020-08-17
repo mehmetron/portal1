@@ -11,31 +11,93 @@ const Container = styled.div`
   align-items: center;
 `;
 
+const Enrolled = styled.div`
+  background-color: gray;
+  color: white;
+  font-size: 24px;
+  border-radius: 4px;
+  padding: 10px;
+`;
+
+const Instruct = styled.div`
+  background-color: green;
+  color: white;
+  font-size: 24px;
+  border-radius: 4px;
+  padding: 10px;
+`;
+
+const Grid = styled.div`
+  display: flex;
+`;
+
 const HeroContainer = styled.div``;
 
 const Home = () => {
   return (
-    <Container>
-      <HeroContainer>
-        <Hero width={260} height={260} />
-      </HeroContainer>
-
-      <Link
-        css={css`
-          text-decoration: none;
-          color: #333;
-        `}
-        to="/boards/"
-      >
-        <Button
-          color="primary"
-          variant="contained"
-          style={{ textTransform: "none" }}
+    <React.Fragment>
+      <div style={{ margin: 50 }}></div>
+      <Grid>
+        <Link
+          css={css`
+            text-decoration: none;
+            color: #333;
+            flex: 1;
+          `}
+          to="/kafka/boards/"
         >
-          View Boards
-        </Button>
-      </Link>
-    </Container>
+          <Enrolled>Enrolled Courses</Enrolled>
+        </Link>
+
+        <Link
+          css={css`
+            text-decoration: none;
+            color: #333;
+            flex: 1;
+          `}
+          to="/kafka/boards/"
+        >
+          <Instruct>Instructed Courses</Instruct>
+        </Link>
+      </Grid>
+      <Container>
+        <HeroContainer>
+          <Hero width={260} height={260} />
+        </HeroContainer>
+
+        <Link
+          css={css`
+            text-decoration: none;
+            color: #333;
+          `}
+          to="/kafka/boards/"
+        >
+          <Button
+            color="primary"
+            variant="contained"
+            style={{ textTransform: "none" }}
+          >
+            View Boards
+          </Button>
+        </Link>
+        <br></br>
+        <Link
+          css={css`
+            text-decoration: none;
+            color: #333;
+          `}
+          to="/kafka/boards/"
+        >
+          <Button
+            color="primary"
+            variant="contained"
+            style={{ textTransform: "none" }}
+          >
+            View Lessons
+          </Button>
+        </Link>
+      </Container>
+    </React.Fragment>
   );
 };
 

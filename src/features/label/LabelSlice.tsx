@@ -11,6 +11,15 @@ import api, { API_LABELS } from "../../api";
 import { createInfoToast, createErrorToast } from "../toast/ToastSlice";
 import { AxiosError } from "axios";
 
+export const fetchAllLabels = createAsyncThunk<Label[]>(
+  "label/fetchAllStatus",
+  async () => {
+    const response = await api.get(API_LABELS);
+    console.log("coming bruh", response);
+    return response.data;
+  }
+);
+
 export const createLabel = createAsyncThunk<Label, Omit<Label, "id">>(
   "label/createLabelStatus",
   async (label, { dispatch }) => {
@@ -71,9 +80,14 @@ export const slice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchBoardById.fulfilled, (state, action) => {
-      labelAdapter.setAll(state, action.payload.labels);
+    builder.addCase(fetchAllLabels.fulfilled, (state, action) => {
+      console.log("poooooo ww9", action.payload);
+      labelAdapter.setAll(state, action.payload);
     });
+    // builder.addCase(fetchBoardById.fulfilled, (state, action) => {
+    //   console.log("peniiiis www", action.payload.labels);
+    //   labelAdapter.setAll(state, action.payload.labels);
+    // });
     builder.addCase(createLabel.fulfilled, (state, action) => {
       labelAdapter.addOne(state, action.payload);
     });

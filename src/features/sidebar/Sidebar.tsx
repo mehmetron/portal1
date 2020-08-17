@@ -11,10 +11,14 @@ import {
   mobileDrawerOpen,
   setMobileDrawerOpen,
 } from "../responsive/ResponsiveSlice";
+import UserMenu from "../../components/UserMenu";
+import { fetchCurrentUser } from "./SidebarSlice";
+import { RootState } from "../../store";
 
 const Container = styled.div`
   height: 100%;
-  background-color: #666eee;
+  /* background-color: #666eee; */
+  background-color: #2d3848;
 `;
 
 const TopArea = styled.div`
@@ -25,7 +29,8 @@ const TopArea = styled.div`
 
 const linkStyles = css`
   display: block;
-  color: #8e97d8;
+  /* color: #8e97d8; */
+  color: #e2eaf0;
   font-weight: bold;
   padding: 6px 20px;
   text-decoration: none;
@@ -41,6 +46,10 @@ const linkStyles = css`
 const Sidebar = () => {
   const dispatch = useDispatch();
   const mobileOpen = useSelector(mobileDrawerOpen);
+
+  React.useEffect(() => {
+    dispatch(fetchCurrentUser());
+  }, []);
 
   const handleCloseMobileDrawer = () => {
     dispatch(setMobileDrawerOpen(false));
@@ -69,9 +78,9 @@ const Sidebar = () => {
 };
 
 const BottomBlock = styled.div`
-  position: absolute;
+  position: relative;
   left: 0px;
-  bottom: 2rem;
+  /* bottom: 2rem; */
   width: 100%;
   display: flex;
   align-items: center;
@@ -85,6 +94,8 @@ const GithubLink = styled.a`
 
 const DrawerContent = () => {
   const history = useHistory();
+  const loading = useSelector((state: RootState) => state.sidebar.fetchLoading);
+  const currentUser = useSelector((state: RootState) => state.sidebar.user);
 
   return (
     <Container>
@@ -105,6 +116,10 @@ const DrawerContent = () => {
           margin-top: 40px;
         `}
       >
+        <BottomBlock>
+          {loading && <UserMenu currentUser={currentUser} />}
+        </BottomBlock>
+        <br></br>
         <NavLink to="/kafka/home/" exact css={linkStyles}>
           Home
         </NavLink>
@@ -114,11 +129,12 @@ const DrawerContent = () => {
         <NavLink to="/kafka/lesson/" exact css={linkStyles}>
           Lessons
         </NavLink>
+
         {/* <NavLink to="/kafka/profile/" exact css={linkStyles}>
           Profile
         </NavLink> */}
       </List>
-      <BottomBlock>
+      {/* <BottomBlock>
         <Tooltip title="View GitHub Repo">
           <GithubLink
             href="https://github.com/rrebase/knboard"
@@ -128,7 +144,7 @@ const DrawerContent = () => {
             <GitHubIcon />
           </GithubLink>
         </Tooltip>
-      </BottomBlock>
+      </BottomBlock> */}
     </Container>
   );
 };

@@ -8,6 +8,7 @@ import { css } from "@emotion/core";
 import styled from "@emotion/styled";
 import { avatarStyles } from "../styles";
 import { useHistory } from "react-router-dom";
+import { CurrentUser } from "../types";
 
 const Username = styled.div`
   color: #333;
@@ -22,8 +23,12 @@ const Username = styled.div`
   }
 `;
 
-const UserMenu = () => {
-  const user = useSelector((state: RootState) => state.auth.user);
+interface Props {
+  currentUser?: CurrentUser;
+}
+
+const UserMenu = ({ currentUser }: Props) => {
+  // const user = useSelector((state: RootState) => state.auth.user);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -69,10 +74,11 @@ const UserMenu = () => {
       >
         <Avatar
           css={avatarStyles}
-          src={user?.photo_url || ""}
+          src=""
+          // src={user?.photo_url || ""}
           alt="user-avatar"
         >
-          {user?.username.charAt(0)}
+          {currentUser?.username.charAt(0)}
         </Avatar>
       </Button>
       <Menu
@@ -86,7 +92,8 @@ const UserMenu = () => {
         transitionDuration={0}
         keepMounted
       >
-        <Username>{user?.username}</Username>
+        <Username>{currentUser?.username}</Username>
+        {/* <Username>{user?.username}</Username> */}
         {/* <MenuItem onClick={handleToProfile}>Profile</MenuItem> */}
         <MenuItem onClick={handleNotImplemented}>Available Shortcuts</MenuItem>
         {/* <MenuItem onClick={handleLogout}>Logout</MenuItem> */}

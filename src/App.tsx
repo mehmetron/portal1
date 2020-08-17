@@ -87,7 +87,7 @@ const AuthenticatedApp = React.lazy(loadAuthenticatedApp);
 // const UnauthenticatedApp = React.lazy(() => import("./features/auth/Auth"));
 
 const AuthWrapper = () => {
-  const user = useSelector((state: RootState) => state.auth.user);
+  // const user = useSelector((state: RootState) => state.auth.user);
 
   useEffect(() => {
     // Preload the AuthenticatedApp
