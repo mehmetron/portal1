@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import React, { useState, useEffect, useRef } from "react";
 import {
   Dialog,
@@ -12,6 +10,8 @@ import {
 } from "@material-ui/core";
 import { RootState } from "../../store";
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+
 import {
   setEditDialogOpen,
   deleteTask,
@@ -23,6 +23,9 @@ import { css } from "@emotion/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTrash,
+  faVideo,
+  faRecordVinyl,
+  faPlay,
   faLock,
   faAlignLeft,
   faCube,
@@ -163,6 +166,8 @@ const DESCRIPTION_PLACEHOLDER = "Write here...";
 const EditTaskDialog = () => {
   const theme = useTheme();
   const dispatch = useDispatch();
+  let history = useHistory();
+
   const columns = useSelector(selectAllColumns);
   const labels = useSelector(selectAllLabels);
   const labelsById = useSelector(selectLabelEntities);
@@ -173,6 +178,9 @@ const EditTaskDialog = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [editingDescription, setEditingDescription] = useState(false);
+  const [video_url, setVideo_url] = useState<string>("");
+  // const [recorded, setRecorded] = useState(false);
+
   const titleTextAreaRef = useRef<HTMLTextAreaElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const editorRef = useRef<MdEditor>(null);
@@ -184,16 +192,26 @@ const EditTaskDialog = () => {
     if (taskId && tasksById[taskId]) {
       setDescription(tasksById[taskId].description);
       setTitle(tasksById[taskId].title);
+      setVideo_url(tasksById[taskId].video_url);
+
+      // if (tasksById[taskId].recording.length > 1) {
+      //   console.log("taskId somesay", taskId);
+      //   setRecorded(true);
+      // }
     }
   }, [open, taskId]);
 
   const handleSaveTitle = () => {
+    dispatch(createInfoToast("Beep boop... Updating title..."));
+
     if (taskId) {
       dispatch(patchTask({ id: taskId, fields: { title } }));
     }
   };
 
   const handleSaveDescription = () => {
+    dispatch(createInfoToast("Beep boop... Updating description..."));
+
     if (taskId) {
       dispatch(patchTask({ id: taskId, fields: { description } }));
       setEditingDescription(false);
@@ -204,6 +222,14 @@ const EditTaskDialog = () => {
     if (taskId && tasksById[taskId]) {
       setDescription(tasksById[taskId].description);
       setEditingDescription(false);
+    }
+  };
+
+  const handleSaveVideo = () => {
+    dispatch(createInfoToast("Beep boop... Adding video..."));
+
+    if (taskId) {
+      dispatch(patchTask({ id: taskId, fields: { video_url } }));
     }
   };
 
@@ -310,6 +336,8 @@ const EditTaskDialog = () => {
   };
 
   const handlePriorityChange = (_: any, priority: Priority | null) => {
+    dispatch(createInfoToast("Beep boop... Updating priority..."));
+
     if (priority) {
       dispatch(patchTask({ id: taskId, fields: { priority: priority.value } }));
     }
@@ -508,19 +536,58 @@ const EditTaskDialog = () => {
               margin-bottom: 2rem;
             `}
           />
+
+          {task.priority == "M" && (
+            <ButtonsContainer>
+              <TextField
+                id="add-video-url"
+                data-testid="add-video-url"
+                label="Add Video url"
+                value={video_url}
+                onChange={(e) => setVideo_url(e.target.value)}
+                variant="outlined"
+                placeholder="https://youtube.com/watch?"
+                helperText="YouTube video url"
+                fullWidth
+                size="small"
+                onBlur={handleSaveVideo}
+                error={false}
+              />
+              <div style={{ marginBottom: "15px" }}></div>
+            </ButtonsContainer>
+          )}
+
+          {task.priority == "H" && (
+            <ButtonsContainer>
+              <Button
+                startIcon={<FontAwesomeIcon fixedWidth icon={faRecordVinyl} />}
+                onClick={() => history.push(`/kafka/lesson/record/${task.id}`)}
+                size="small"
+                css={css`
+                  font-size: 12px;
+                  font-weight: bold;
+                  color: ${TASK_G};
+                `}
+                disabled={task.recording.length != 0}
+              >
+                Record coding session
+              </Button>
+              <Button
+                startIcon={<FontAwesomeIcon fixedWidth icon={faPlay} />}
+                onClick={() => history.push(`/kafka/lesson/play/${task.id}`)}
+                size="small"
+                css={css`
+                  font-size: 12px;
+                  font-weight: bold;
+                  color: ${TASK_G};
+                `}
+                disabled={task.recording.length == 0}
+              >
+                Play coding session
+              </Button>
+            </ButtonsContainer>
+          )}
           <ButtonsContainer>
-            <Button
-              startIcon={<FontAwesomeIcon fixedWidth icon={faLock} />}
-              onClick={handleNotImplemented}
-              size="small"
-              css={css`
-                font-size: 12px;
-                font-weight: bold;
-                color: ${TASK_G};
-              `}
-            >
-              Lock task
-            </Button>
             <Button
               startIcon={<FontAwesomeIcon fixedWidth icon={faTrash} />}
               onClick={handleDelete}
@@ -536,6 +603,7 @@ const EditTaskDialog = () => {
               Delete task
             </Button>
           </ButtonsContainer>
+
           <Text>
             Updated {formatDistanceToNow(new Date(task.modified))} ago
           </Text>

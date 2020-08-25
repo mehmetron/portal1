@@ -19,7 +19,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faColumns, faCog } from "@fortawesome/free-solid-svg-icons";
 // import { setDialogOpen } from "../label/LabelSlice";
 // import LabelDialog from "../label/LabelDialog";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 // import { selectAllMembers, setMemberListOpen } from "../member/MemberSlice";
 // import MemberListDialog from "../member/MemberList";
 
@@ -68,6 +68,8 @@ const BoardBar = () => {
   const detail = useSelector((state: RootState) => state.board.detail);
   const boardOwner = useSelector(currentBoardOwner);
   const { id } = useParams();
+  const history = useHistory();
+
   const detailDataExists = detail?.id.toString() === id;
 
   if (!detailDataExists || error || !detail) {
@@ -139,6 +141,17 @@ const BoardBar = () => {
             data-testid="add-col"
           >
             Add List
+          </Button>
+          <Button
+            size="small"
+            css={css`
+              ${buttonStyles}
+            `}
+            onClick={() => history.push(`/kafka/b/${id}/edit`)}
+            startIcon={<FontAwesomeIcon icon={faColumns} />}
+            data-testid="add-col"
+          >
+            Edit Course
           </Button>
         </Right>
       </Items>

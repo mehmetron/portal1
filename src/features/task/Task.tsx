@@ -19,6 +19,7 @@ import TaskLabels from "./TaskLabels";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCube } from "@fortawesome/free-solid-svg-icons";
 // import { selectMembersEntities } from "../member/MemberSlice";
+import Flex from "../../components/Flex";
 
 const getBackgroundColor = (isDragging: boolean, isGroupedOver: boolean) => {
   if (isDragging) {
@@ -188,7 +189,9 @@ const Task = ({ task: task, style, index }: Props) => {
           <Content>
             <TextContent>{task.title}</TextContent>
             <TaskId>id: {task.id}</TaskId>
+
             <TaskLabels task={task} />
+
             {/* <TaskFooter task={task} /> */}
           </Content>
         </Container>

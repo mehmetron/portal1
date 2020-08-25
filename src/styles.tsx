@@ -59,7 +59,7 @@ export const taskContainerStyles = css`
 export const avatarStyles = css`
   height: 2rem;
   width: 2rem;
-  font-size: 12px;
+  font-size: 14px;
   margin-left: -4px;
 `;
 

@@ -37,6 +37,8 @@ interface PatchFields {
   description: string;
   priority: PriorityValue;
   labels: Id[];
+  video_url: string;
+  recording: string;
   // assignees: Id[];
 }
 

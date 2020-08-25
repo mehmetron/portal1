@@ -24,10 +24,23 @@ export interface NanoBoard {
   owner: Id;
 }
 
+export interface ICategory {
+  id: number;
+  title: string;
+}
+
 export interface Board {
   id: number;
   name: string;
   owner: Id;
+  short_description: string;
+  description: string;
+  category: ICategory;
+  outcome: string;
+  thumbnail: string;
+  video_url: string;
+  is_published: boolean;
+  price: number;
   // members: BoardMember[];
 }
 
@@ -51,11 +64,17 @@ export interface ITask {
   title: string;
   description: string;
   labels: Id[];
-  assignees: Id[];
+  // assignees: Id[];
+  video_url: string;
+  recording: string;
   priority: PriorityValue;
 }
 
-export interface NewTask extends Omit<ITask, "id" | "created" | "modified"> {
+export interface NewTask
+  extends Omit<
+    ITask,
+    "id" | "created" | "modified" | "video_url" | "recording"
+  > {
   column: Id;
 }
 

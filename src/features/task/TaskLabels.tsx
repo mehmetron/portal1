@@ -2,6 +2,7 @@ import React from "react";
 import { ITask, Label } from "../../types";
 import { useSelector } from "react-redux";
 import LabelChip from "../../components/LabelChip";
+import PriorityChip from "../../components/PriorityChip";
 import styled from "@emotion/styled";
 import { selectLabelEntities } from "../label/LabelSlice";
 
@@ -21,6 +22,7 @@ const TaskLabels = ({ task }: Props) => {
 
   return (
     <Container>
+      <PriorityChip task={task} />
       {labels.map((label) => (
         <LabelChip key={label.id} label={label} onCard />
       ))}

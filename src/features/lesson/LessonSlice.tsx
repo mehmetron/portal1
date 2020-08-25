@@ -99,7 +99,6 @@ export const slice = createSlice({
       state.detailError = undefined;
       state.detailLoading = false;
     });
-
     builder.addCase(fetchLessonById.rejected, (state, action) => {
       state.detailError = action.payload;
       state.detailLoading = false;

@@ -100,14 +100,28 @@ const DrawerContent = () => {
   return (
     <Container>
       <TopArea>
-        <Logo
-          css={css`
-            &:hover {
-              cursor: pointer;
-            }
-          `}
-          onClick={() => history.push("/")}
-        />
+        <div>
+          <img
+            css={css`
+              height: 20px;
+              &:hover {
+                cursor: pointer;
+              }
+            `}
+            onClick={() => history.push("/")}
+            src="https://tailwindui.com/img/logos/workflow-logo-on-dark.svg"
+            alt="Workflow logo"
+          />
+
+          {/* <Logo
+            css={css`
+              &:hover {
+                cursor: pointer;
+              }
+            `}
+            onClick={() => history.push("/")}
+          /> */}
+        </div>
       </TopArea>
 
       <List

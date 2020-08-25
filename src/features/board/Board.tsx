@@ -7,6 +7,8 @@ import {
   DraggableLocation,
   DropResult,
 } from "react-beautiful-dnd";
+import { useParams } from "react-router-dom";
+
 import Column from "../column";
 import { IColumn } from "../../types";
 import reorder, { reorderTasks } from "../../utils/reorder";
@@ -14,7 +16,7 @@ import { RootState } from "../../store";
 import { useSelector, useDispatch } from "react-redux";
 import { updateTasksByColumn } from "../task/TaskSlice";
 import { updateColumns, columnSelectors } from "../column/ColumnSlice";
-import { useParams } from "react-router-dom";
+
 import { fetchBoardById } from "./BoardSlice";
 import { fetchAllLabels } from "../label/LabelSlice";
 import Spinner from "../../components/Spinner";

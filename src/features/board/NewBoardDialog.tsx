@@ -9,12 +9,19 @@ import {
   Button,
 } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
-import { createBoard, setCreateDialogOpen } from "./BoardSlice";
-import { RootState } from "../../store";
+// import { useHistory } from "react-router-dom";
 import { Alert } from "@material-ui/lab";
 import { css } from "@emotion/core";
-import { boardCardBaseStyles } from "../../styles";
 import { useForm } from "react-hook-form";
+
+import {
+  createBoard,
+  setCreateDialogOpen,
+  CreateBoardForm,
+} from "./BoardSlice";
+import { RootState } from "../../store";
+
+import { boardCardBaseStyles } from "../../styles";
 
 const openBtnStyles = css`
   ${boardCardBaseStyles}
@@ -32,15 +39,18 @@ const openBtnStyles = css`
   }
 `;
 
-interface FormData {
-  name: string;
-}
+// interface FormData {
+//   name: string;
+// }
 
 const NewBoardDialog = () => {
   const dispatch = useDispatch();
   const error = useSelector((state: RootState) => state.board.createError);
   const open = useSelector((state: RootState) => state.board.createDialogOpen);
-  const { register, handleSubmit, errors, reset } = useForm<FormData>();
+
+  const { register, handleSubmit, errors, reset } = useForm<CreateBoardForm>();
+
+  // let history = useHistory();
 
   const handleOpen = () => {
     reset();
@@ -51,8 +61,9 @@ const NewBoardDialog = () => {
     dispatch(setCreateDialogOpen(false));
   };
 
-  const onSubmit = handleSubmit(({ name }) => {
-    dispatch(createBoard(name));
+  const onSubmit = handleSubmit((fields) => {
+    dispatch(createBoard(fields));
+    // history.push(`/kafka/b/${id}/edit`);
   });
 
   return (
@@ -91,6 +102,22 @@ const NewBoardDialog = () => {
               })}
               helperText={errors.name?.message}
               error={Boolean(errors.name)}
+            />
+            <TextField
+              margin="dense"
+              id="board-description"
+              label="Board description"
+              fullWidth
+              name="description"
+              inputRef={register({
+                required: "This field is required",
+                maxLength: {
+                  value: 50,
+                  message: "This field can't be more than 50 chars long.",
+                },
+              })}
+              helperText={errors.description?.message}
+              error={Boolean(errors.description)}
             />
           </DialogContent>
           <DialogActions>

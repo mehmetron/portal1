@@ -1,8 +1,29 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
-import { Board, IColumn, ITask, Label, NanoBoard } from "../../types";
+import {
+  Board,
+  ICategory,
+  Id,
+  IColumn,
+  ITask,
+  Label,
+  NanoBoard,
+} from "../../types";
 import api, { API_BOARDS } from "../../api";
 import { RootState } from "../../store";
 // import { logout } from "../auth/AuthSlice";
+import { createErrorToast, createInfoToast } from "../toast/ToastSlice";
+
+export interface CreateBoardForm {
+  name: string;
+  short_description: string;
+  description: string;
+  category: ICategory;
+  outcome: string;
+  thumbnail: string;
+  video_url: string;
+  is_published: boolean;
+  price: number;
+}
 
 interface InitialState {
   detail: Board | null;
@@ -60,13 +81,30 @@ export const fetchBoardById = createAsyncThunk<
   }
 });
 
-export const createBoard = createAsyncThunk<Board, string>(
+export const createBoard = createAsyncThunk<Board, Partial<CreateBoardForm>>(
   "board/createBoardStatus",
-  async (name) => {
-    const response = await api.post(API_BOARDS, { name });
+  async (fields) => {
+    const response = await api.post(API_BOARDS, fields);
     return response.data;
   }
 );
+
+export const deleteBoard = createAsyncThunk<Id, Id>(
+  "board/deleteBoardStatus",
+  async (id, { dispatch }) => {
+    await api.delete(`${API_BOARDS}${id}/`);
+    dispatch(createInfoToast("Board deleted"));
+    return id;
+  }
+);
+
+export const patchBoard = createAsyncThunk<
+  Board,
+  { id: Id; fields: Partial<CreateBoardForm> }
+>("column/patchColumnStatus", async ({ id, fields }) => {
+  const response = await api.patch(`${API_BOARDS}${id}/`, fields);
+  return response.data;
+});
 
 export const slice = createSlice({
   name: "board",
@@ -95,11 +133,36 @@ export const slice = createSlice({
       state.detailLoading = true;
     });
     builder.addCase(fetchBoardById.fulfilled, (state, action) => {
-      const { id, name, owner } = action.payload;
-      state.detail = { id, name, owner };
+      const {
+        id,
+        name,
+        owner,
+        short_description,
+        description,
+        category,
+        outcome,
+        thumbnail,
+        video_url,
+        is_published,
+        price,
+      } = action.payload;
+      state.detail = {
+        id,
+        name,
+        owner,
+        short_description,
+        description,
+        category,
+        outcome,
+        thumbnail,
+        video_url,
+        is_published,
+        price,
+      };
       state.detailError = undefined;
       state.detailLoading = false;
     });
+
     // builder.addCase(fetchBoardById.fulfilled, (state, action) => {
     //   const { id, name, owner, members } = action.payload;
     //   state.detail = { id, name, owner, members };
@@ -127,6 +190,19 @@ export const slice = createSlice({
     //   state.all = [];
     //   state.detail = null;
     // });
+
+    builder.addCase(deleteBoard.pending, (state) => {
+      console.log("pending deletion");
+    });
+    builder.addCase(deleteBoard.fulfilled, (state, action) => {
+      console.log("i think it's deleted", action.payload);
+    });
+    builder.addCase(deleteBoard.rejected, (state, action) => {
+      console.log("It rejected deletion", action.payload);
+    });
+    builder.addCase(patchBoard.fulfilled, (state, action) => {
+      state.all[action.payload.id] = action.payload;
+    });
   },
 });
 

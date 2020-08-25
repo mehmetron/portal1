@@ -1,13 +1,16 @@
 import React from "react";
-import { Switch, Route, RouteProps } from "react-router-dom";
+import { Switch, Route, RouteProps, useLocation } from "react-router-dom";
 import styled from "@emotion/styled";
 
 import Board from "./features/board";
 import BoardList from "./features/board/BoardList";
+import BoardEdit from "./features/board/BoardEdit";
 import Navbar from "./components/Navbar";
 import Home from "./features/home/Home";
 import BoardBar from "./features/board/BoardBar";
 import LessonPage from "./features/lesson/LessonPage";
+import LessonReplay from "./features/lesson/LessonReplay";
+import LessonRecord from "./features/lesson/LessonRecord";
 // import Profile from "./features/profile/Profile";
 import Sidebar from "./features/sidebar/Sidebar";
 // import PageError from "./components/PageError";
@@ -22,14 +25,22 @@ const Main = styled.div<WithTheme>`
 
 const Wrapper: React.FC = ({ children }) => {
   const theme = useTheme();
+  const location = useLocation();
 
   return (
     <>
-      <Sidebar />
-      <Main theme={theme}>
-        <Navbar />
-        {children}
-      </Main>
+      {!location.pathname.includes("/kafka/lesson/record") &&
+      !location.pathname.includes("/kafka/lesson/play") ? (
+        <>
+          <Sidebar />
+          <Main theme={theme}>
+            <Navbar />
+            {children}
+          </Main>
+        </>
+      ) : (
+        <div>{children}</div>
+      )}
     </>
   );
 };
@@ -54,6 +65,10 @@ const AuthenticatedApp = () => {
         <Board />
       </AppRoute>
 
+      <AppRoute exact path="/kafka/b/:id/edit">
+        <BoardEdit />
+      </AppRoute>
+
       <AppRoute exact path="/kafka/home">
         <Home />
       </AppRoute>
@@ -61,6 +76,15 @@ const AuthenticatedApp = () => {
       <AppRoute exact path="/kafka/lesson">
         <LessonPage />
       </AppRoute>
+
+      <AppRoute exact path="/kafka/lesson/play/:id">
+        <LessonReplay />
+      </AppRoute>
+
+      <AppRoute exact path="/kafka/lesson/record/:id">
+        <LessonRecord />
+      </AppRoute>
+
       {/* <Route path="*">
         <PageError>Page not found.</PageError>
       </Route> */}
