@@ -16,9 +16,9 @@ export const taskWidth = 250;
 export const taskSideWidth = 220;
 export const taskDialogHeight = 600;
 
-export const PRIORITY_1: Priority = { value: "H", label: "High" };
-export const PRIORITY_2: Priority = { value: "M", label: "Medium" };
-export const PRIORITY_3: Priority = { value: "L", label: "Low" };
+export const PRIORITY_1: Priority = { value: "V", label: "Video" };
+export const PRIORITY_2: Priority = { value: "C", label: "Code" };
+export const PRIORITY_3: Priority = { value: "T", label: "Text" };
 
 export const PRIORITY_OPTIONS: Priority[] = [
   PRIORITY_1,
@@ -32,9 +32,9 @@ export const PRIORITY_MAP = PRIORITY_OPTIONS.reduce((acc, curr) => {
 }, {} as Record<PriorityValue, Priority>);
 
 export const PRIO_COLORS = {
-  H: PRIO1,
-  M: PRIO2,
-  L: PRIO3,
+  V: PRIO1,
+  C: PRIO2,
+  T: PRIO3,
 };
 
 export const MD_EDITOR_PLUGINS = [

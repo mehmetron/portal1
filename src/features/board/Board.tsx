@@ -119,7 +119,7 @@ const Board = () => {
   }
 
   if (columns.length === 0) {
-    return <EmptyBoard>This board is empty.</EmptyBoard>;
+    return <EmptyBoard>This course is empty.</EmptyBoard>;
   }
 
   return (

@@ -50,11 +50,11 @@ export interface IColumn {
   board: Id;
 }
 
-export type PriorityValue = "H" | "M" | "L";
+export type PriorityValue = "V" | "C" | "T";
 
 export interface Priority {
   value: PriorityValue;
-  label: "High" | "Medium" | "Low";
+  label: "Video" | "Code" | "Text";
 }
 
 export interface ITask {

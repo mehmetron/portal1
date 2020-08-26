@@ -133,7 +133,7 @@ const BoardList = () => {
       <BoardsSection>
         <Title>
           <FontAwesomeIcon icon={faTh} />
-          <TitleText>All Boards</TitleText>
+          <TitleText>All Courses</TitleText>
         </Title>
         <Cards>
           <Grid container spacing={2}>

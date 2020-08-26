@@ -144,7 +144,7 @@ const CreateTaskDialog = () => {
       fullScreen={xsDown}
     >
       <Content onKeyDown={handleKeyDown}>
-        <DialogTitle>New issue</DialogTitle>
+        <DialogTitle>New lesson</DialogTitle>
 
         <TextField
           autoFocus
@@ -167,7 +167,7 @@ const CreateTaskDialog = () => {
             value={description}
             renderHTML={(text) => mdParser.render(text)}
             onChange={handleEditorChange}
-            placeholder="Describe the issue..."
+            placeholder="Describe the lesson..."
           />
         </EditorWrapper>
 
@@ -274,7 +274,7 @@ const CreateTaskDialog = () => {
             }
           `}
         >
-          Create issue {getSaveShortcutLabel()}
+          Create lesson {getSaveShortcutLabel()}
         </Button>
         <Button
           css={css`

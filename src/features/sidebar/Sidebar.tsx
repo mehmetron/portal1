@@ -135,13 +135,13 @@ const DrawerContent = () => {
         </BottomBlock>
         <br></br>
         <NavLink to="/kafka/home/" exact css={linkStyles}>
-          Home
+          Dashboard
         </NavLink>
         <NavLink to="/kafka/boards/" exact css={linkStyles}>
-          Boards
+          Instructed
         </NavLink>
         <NavLink to="/kafka/lesson/" exact css={linkStyles}>
-          Lessons
+          Enrolled
         </NavLink>
 
         {/* <NavLink to="/kafka/profile/" exact css={linkStyles}>

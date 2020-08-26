@@ -43,7 +43,7 @@ const AddTask = ({ columnId }: Props) => {
       onClick={handleOnClick}
       fullWidth
     >
-      Add another card
+      Add another lesson
     </Button>
   );
 };

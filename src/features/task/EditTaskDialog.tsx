@@ -537,7 +537,7 @@ const EditTaskDialog = () => {
             `}
           />
 
-          {task.priority == "M" && (
+          {task.priority == "V" && (
             <ButtonsContainer>
               <TextField
                 id="add-video-url"
@@ -557,7 +557,7 @@ const EditTaskDialog = () => {
             </ButtonsContainer>
           )}
 
-          {task.priority == "H" && (
+          {task.priority == "C" && (
             <ButtonsContainer>
               <Button
                 startIcon={<FontAwesomeIcon fixedWidth icon={faRecordVinyl} />}

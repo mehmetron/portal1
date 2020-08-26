@@ -69,7 +69,7 @@ const NewBoardDialog = () => {
   return (
     <div>
       <Button css={openBtnStyles} onClick={handleOpen}>
-        Create new board
+        Create new course
       </Button>
       <Dialog
         open={open}
@@ -78,19 +78,19 @@ const NewBoardDialog = () => {
         fullWidth
         maxWidth="xs"
       >
-        <DialogTitle id="new-board-title">New board</DialogTitle>
+        <DialogTitle id="new-board-title">New course</DialogTitle>
         <form onSubmit={onSubmit}>
           <DialogContent>
             <DialogContentText>
-              Create a new private board. Only members of the board will be able
-              to see and edit it.
+              Create a new private course. Only members of the course will be
+              able to see and edit it.
             </DialogContentText>
             {error && <Alert severity="error">{error}</Alert>}
             <TextField
               autoFocus
               margin="dense"
               id="board-name"
-              label="Board name"
+              label="Course name"
               fullWidth
               name="name"
               inputRef={register({
@@ -103,10 +103,10 @@ const NewBoardDialog = () => {
               helperText={errors.name?.message}
               error={Boolean(errors.name)}
             />
-            <TextField
+            {/* <TextField
               margin="dense"
               id="board-description"
-              label="Board description"
+              label="Course description"
               fullWidth
               name="description"
               inputRef={register({
@@ -118,7 +118,7 @@ const NewBoardDialog = () => {
               })}
               helperText={errors.description?.message}
               error={Boolean(errors.description)}
-            />
+            /> */}
           </DialogContent>
           <DialogActions>
             <Button
@@ -126,7 +126,7 @@ const NewBoardDialog = () => {
               color="primary"
               data-testid="create-board-btn"
             >
-              Create Board
+              Create Course
             </Button>
           </DialogActions>
         </form>
