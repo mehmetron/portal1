@@ -63,7 +63,7 @@ const NewBoardDialog = () => {
 
   const onSubmit = handleSubmit((fields) => {
     dispatch(createBoard(fields));
-    // history.push(`/kafka/b/${id}/edit`);
+    // history.push(`/portal/b/${id}/edit`);
   });
 
   return (

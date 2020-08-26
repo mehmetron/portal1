@@ -44,7 +44,7 @@ const Home = () => {
             color: #333;
             flex: 1;
           `}
-          to="/kafka/boards/"
+          to="/portal/boards/"
         >
           <Enrolled>Enrolled Courses</Enrolled>
         </Link>
@@ -55,7 +55,7 @@ const Home = () => {
             color: #333;
             flex: 1;
           `}
-          to="/kafka/boards/"
+          to="/portal/boards/"
         >
           <Instruct>Instructed Courses</Instruct>
         </Link>
@@ -70,7 +70,7 @@ const Home = () => {
             text-decoration: none;
             color: #333;
           `}
-          to="/kafka/boards/"
+          to="/portal/boards/"
         >
           <Button
             color="primary"
@@ -86,7 +86,7 @@ const Home = () => {
             text-decoration: none;
             color: #333;
           `}
-          to="/kafka/boards/"
+          to="/portal/boards/"
         >
           <Button
             color="primary"

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 // import { css } from "@emotion/core";
 // import styled from "@emotion/styled";
 // import UserSearch, { UserOption } from "../../components/UserSearch";
-// import api, { API_BOARDS } from "../../api";
+// import api, { API_COURSES } from "../../api";
 // import { useDispatch } from "react-redux";
 // import { createErrorToast, createSuccessToast } from "../toast/ToastSlice";
 // import { BoardMember } from "../../types";

@@ -77,7 +77,7 @@ const BoardEdit = (props: Props) => {
     // @ts-ignore
     dispatch(deleteBoard(id)).then(() => {
       console.log("hmmm no7");
-      history.push("/kafka/boards");
+      history.push("/portal/boards");
     });
   };
 

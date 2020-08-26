@@ -47,8 +47,8 @@ import {
   MD_EDITING_CONFIG,
   MD_READ_ONLY_CONFIG,
   Key,
-  taskDialogHeight,
-  taskSideWidth,
+  lessonDialogHeight,
+  lessonSideWidth,
 } from "../../const";
 import Close from "../../components/Close";
 import { selectAllLabels, selectLabelEntities } from "../label/LabelSlice";
@@ -62,7 +62,7 @@ const mdParser = new MarkdownIt({ breaks: true });
 const Content = styled.div<WithTheme>`
   display: flex;
   padding: 2rem;
-  height: ${taskDialogHeight}px;
+  height: ${lessonDialogHeight}px;
   ${(props) => props.theme.breakpoints.down("xs")} {
     flex-direction: column;
   }
@@ -75,8 +75,8 @@ const Main = styled.div`
 const Side = styled.div<WithTheme>`
   margin-top: 2rem;
   ${(props) => props.theme.breakpoints.up("sm")} {
-    max-width: ${taskSideWidth}px;
-    min-width: ${taskSideWidth}px;
+    max-width: ${lessonSideWidth}px;
+    min-width: ${lessonSideWidth}px;
   }
 `;
 
@@ -561,7 +561,7 @@ const EditTaskDialog = () => {
             <ButtonsContainer>
               <Button
                 startIcon={<FontAwesomeIcon fixedWidth icon={faRecordVinyl} />}
-                onClick={() => history.push(`/kafka/lesson/record/${task.id}`)}
+                onClick={() => history.push(`/portal/lesson/record/${task.id}`)}
                 size="small"
                 css={css`
                   font-size: 12px;
@@ -574,7 +574,7 @@ const EditTaskDialog = () => {
               </Button>
               <Button
                 startIcon={<FontAwesomeIcon fixedWidth icon={faPlay} />}
-                onClick={() => history.push(`/kafka/lesson/play/${task.id}`)}
+                onClick={() => history.push(`/portal/lesson/play/${task.id}`)}
                 size="small"
                 css={css`
                   font-size: 12px;

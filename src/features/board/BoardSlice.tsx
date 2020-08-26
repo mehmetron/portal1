@@ -8,7 +8,7 @@ import {
   Label,
   NanoBoard,
 } from "../../types";
-import api, { API_BOARDS } from "../../api";
+import api, { API_COURSES } from "../../api";
 import { RootState } from "../../store";
 // import { logout } from "../auth/AuthSlice";
 import { createErrorToast, createInfoToast } from "../toast/ToastSlice";
@@ -61,7 +61,7 @@ interface BoardDetailResponse extends Board {
 export const fetchAllBoards = createAsyncThunk<Board[]>(
   "board/fetchAllStatus",
   async () => {
-    const response = await api.get(API_BOARDS);
+    const response = await api.get(API_COURSES);
     return response.data;
   }
 );
@@ -74,7 +74,7 @@ export const fetchBoardById = createAsyncThunk<
   }
 >("board/fetchByIdStatus", async (id, { rejectWithValue }) => {
   try {
-    const response = await api.get(`${API_BOARDS}${id}/`);
+    const response = await api.get(`${API_COURSES}${id}/`);
     return response.data;
   } catch (err) {
     return rejectWithValue(err.message);
@@ -84,7 +84,7 @@ export const fetchBoardById = createAsyncThunk<
 export const createBoard = createAsyncThunk<Board, Partial<CreateBoardForm>>(
   "board/createBoardStatus",
   async (fields) => {
-    const response = await api.post(API_BOARDS, fields);
+    const response = await api.post(API_COURSES, fields);
     return response.data;
   }
 );
@@ -92,7 +92,7 @@ export const createBoard = createAsyncThunk<Board, Partial<CreateBoardForm>>(
 export const deleteBoard = createAsyncThunk<Id, Id>(
   "board/deleteBoardStatus",
   async (id, { dispatch }) => {
-    await api.delete(`${API_BOARDS}${id}/`);
+    await api.delete(`${API_COURSES}${id}/`);
     dispatch(createInfoToast("Board deleted"));
     return id;
   }
@@ -102,7 +102,7 @@ export const patchBoard = createAsyncThunk<
   Board,
   { id: Id; fields: Partial<CreateBoardForm> }
 >("column/patchColumnStatus", async ({ id, fields }) => {
-  const response = await api.patch(`${API_BOARDS}${id}/`, fields);
+  const response = await api.patch(`${API_COURSES}${id}/`, fields);
   return response.data;
 });
 

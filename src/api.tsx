@@ -21,25 +21,25 @@ export const setupInterceptors = (store: any) => {
 };
 
 // Available endpoints
-export const API_LOGIN = "/kafka/accounts/login/";
-export const API_LOGOUT = "/kafka/accounts/logout/";
-export const API_REGISTER = "/kafka/auth/registration/";
-// export const API_LOGIN = "/kafka/auth/login/";
-// export const API_LOGOUT = "/kafka/auth/logout/";
-// export const API_REGISTER = "/kafka/auth/registration/";
-export const API_GUEST_REGISTER = "/kafka/auth/guest/";
-export const API_AUTH_SETUP = "/kafka/auth/setup/";
+export const API_LOGIN = "/portal/accounts/login/";
+export const API_LOGOUT = "/portal/accounts/logout/";
+export const API_REGISTER = "/portal/auth/registration/";
+// export const API_LOGIN = "/portal/auth/login/";
+// export const API_LOGOUT = "/portal/auth/logout/";
+// export const API_REGISTER = "/portal/auth/registration/";
+export const API_GUEST_REGISTER = "/portal/auth/guest/";
+export const API_AUTH_SETUP = "/portal/auth/setup/";
 
-export const API_AVATARS = "/kafka/api/avatars/";
-export const API_BOARDS = "/kafka/api/boards/";
-export const API_COLUMNS = "/kafka/api/columns/";
-export const API_TASKS = "/kafka/api/tasks/";
-export const API_LABELS = "/kafka/api/labels/";
-export const API_SORT_COLUMNS = "/kafka/api/sort/column/";
-export const API_SORT_TASKS = "/kafka/api/sort/task/";
-export const API_USERS = "/kafka/api/users/";
-export const API_SEARCH_USERS = "/kafka/api/u/search/";
+export const API_AVATARS = "/portal/api/avatars/";
+export const API_COURSES = "/portal/api/courses/";
+export const API_COLUMNS = "/portal/api/columns/";
+export const API_LESSONS = "/portal/api/lessons/";
+export const API_LABELS = "/portal/api/labels/";
+export const API_SORT_COLUMNS = "/portal/api/sort/column/";
+export const API_SORT_TASKS = "/portal/api/sort/task/";
+export const API_USERS = "/portal/api/users/";
+export const API_SEARCH_USERS = "/portal/api/u/search/";
 // Get current user
-export const API_CURRENT_USER = "/kafka/api/currentuser/";
+export const API_CURRENT_USER = "/portal/api/currentuser/";
 
 export default axios;

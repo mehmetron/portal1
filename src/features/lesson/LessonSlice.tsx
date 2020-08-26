@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 // import { Board, IColumn, ITask, Label, NanoBoard } from "../../types";
-import api, { API_BOARDS } from "../../api";
+import api, { API_COURSES } from "../../api";
 
 interface InitialState {
   detail: TASK | null;

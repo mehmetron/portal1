@@ -147,7 +147,7 @@ const BoardBar = () => {
             css={css`
               ${buttonStyles}
             `}
-            onClick={() => history.push(`/kafka/b/${id}/edit`)}
+            onClick={() => history.push(`/portal/b/${id}/edit`)}
             startIcon={<FontAwesomeIcon icon={faColumns} />}
             data-testid="add-col"
           >

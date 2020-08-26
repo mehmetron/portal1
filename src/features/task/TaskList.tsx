@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { R50, T50, COLUMN_COLOR } from "../../utils/colors";
-import { grid, barHeight, taskWidth } from "../../const";
+import { grid, barHeight, lessonWidth } from "../../const";
 import { ITask } from "../../types";
 import {
   DroppableProvided,
@@ -38,7 +38,7 @@ const Wrapper = styled.div<{
   padding-bottom: 0;
   transition: background-color 0.2s ease, opacity 0.1s ease;
   user-select: none;
-  width: ${taskWidth}px;
+  width: ${lessonWidth}px;
 `;
 
 const scrollContainerHeight = 250;

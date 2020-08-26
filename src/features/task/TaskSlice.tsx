@@ -7,7 +7,7 @@ import {
   createSuccessToast,
   createInfoToast,
 } from "../toast/ToastSlice";
-import api, { API_SORT_TASKS, API_TASKS } from "../../api";
+import api, { API_SORT_TASKS, API_LESSONS } from "../../api";
 import { addColumn, deleteColumn } from "../column/ColumnSlice";
 import { deleteLabel } from "../label/LabelSlice";
 // import { removeBoardMember } from "../member/MemberSlice";
@@ -46,7 +46,7 @@ export const patchTask = createAsyncThunk<
   ITask,
   { id: Id; fields: Partial<PatchFields> }
 >("task/patchTaskStatus", async ({ id, fields }) => {
-  const response = await api.patch(`${API_TASKS}${id}/`, fields);
+  const response = await api.patch(`${API_LESSONS}${id}/`, fields);
   return response.data;
 });
 
@@ -62,7 +62,7 @@ export const createTask = createAsyncThunk<
   }
 >("task/createTaskStatus", async (task, { dispatch, rejectWithValue }) => {
   try {
-    const response = await api.post(`${API_TASKS}`, task);
+    const response = await api.post(`${API_LESSONS}`, task);
     dispatch(createSuccessToast("Task created"));
     return response.data;
   } catch (err) {
@@ -73,7 +73,7 @@ export const createTask = createAsyncThunk<
 export const deleteTask = createAsyncThunk<Id, Id>(
   "task/deleteTaskStatus",
   async (id, { dispatch }) => {
-    await api.delete(`${API_TASKS}${id}/`);
+    await api.delete(`${API_LESSONS}${id}/`);
     dispatch(createInfoToast("Task deleted"));
     return id;
   }

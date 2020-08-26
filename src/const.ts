@@ -11,10 +11,10 @@ export const borderRadius = 4;
 export const imageSize = 40;
 export const barHeight = 50;
 export const sidebarWidth = 120;
-export const taskHeaderTextareaWidth = 180;
-export const taskWidth = 250;
-export const taskSideWidth = 220;
-export const taskDialogHeight = 600;
+export const lessonHeaderTextareaWidth = 180;
+export const lessonWidth = 250;
+export const lessonSideWidth = 220;
+export const lessonDialogHeight = 600;
 
 export const PRIORITY_1: Priority = { value: "V", label: "Video" };
 export const PRIORITY_2: Priority = { value: "C", label: "Code" };

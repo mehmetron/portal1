@@ -134,17 +134,17 @@ const DrawerContent = () => {
           {loading && <UserMenu currentUser={currentUser} />}
         </BottomBlock>
         <br></br>
-        <NavLink to="/kafka/home/" exact css={linkStyles}>
+        <NavLink to="/portal/home/" exact css={linkStyles}>
           Dashboard
         </NavLink>
-        <NavLink to="/kafka/boards/" exact css={linkStyles}>
+        <NavLink to="/portal/boards/" exact css={linkStyles}>
           Instructed
         </NavLink>
-        <NavLink to="/kafka/lesson/" exact css={linkStyles}>
+        <NavLink to="/portal/lesson/" exact css={linkStyles}>
           Enrolled
         </NavLink>
 
-        {/* <NavLink to="/kafka/profile/" exact css={linkStyles}>
+        {/* <NavLink to="/portal/profile/" exact css={linkStyles}>
           Profile
         </NavLink> */}
       </List>

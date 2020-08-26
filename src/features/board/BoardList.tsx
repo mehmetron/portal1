@@ -141,7 +141,7 @@ const BoardList = () => {
               <Card
                 key={board.id}
                 cardCss={boardCardStyles}
-                to={`/kafka/b/${board.id}`}
+                to={`/portal/b/${board.id}`}
                 isOwner={true}
                 // isOwner={board.owner === userId}
               >

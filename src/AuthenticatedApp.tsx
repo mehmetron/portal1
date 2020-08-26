@@ -29,8 +29,8 @@ const Wrapper: React.FC = ({ children }) => {
 
   return (
     <>
-      {!location.pathname.includes("/kafka/lesson/record") &&
-      !location.pathname.includes("/kafka/lesson/play") ? (
+      {!location.pathname.includes("/portal/lesson/record") &&
+      !location.pathname.includes("/portal/lesson/play") ? (
         <>
           <Sidebar />
           <Main theme={theme}>
@@ -54,34 +54,34 @@ const AppRoute = (props: RouteProps) => (
 const AuthenticatedApp = () => {
   return (
     <Switch>
-      {/* <AppRoute exact path="/kafka/profile">
+      {/* <AppRoute exact path="/portal/profile">
         <Profile />
       </AppRoute> */}
-      <AppRoute exact path="/kafka/boards">
+      <AppRoute exact path="/portal/boards">
         <BoardList />
       </AppRoute>
-      <AppRoute exact path="/kafka/b/:id">
+      <AppRoute exact path="/portal/b/:id">
         <BoardBar />
         <Board />
       </AppRoute>
 
-      <AppRoute exact path="/kafka/b/:id/edit">
+      <AppRoute exact path="/portal/b/:id/edit">
         <BoardEdit />
       </AppRoute>
 
-      <AppRoute exact path="/kafka/home">
+      <AppRoute exact path="/portal/home">
         <Home />
       </AppRoute>
 
-      <AppRoute exact path="/kafka/lesson">
+      <AppRoute exact path="/portal/lesson">
         <LessonPage />
       </AppRoute>
 
-      <AppRoute exact path="/kafka/lesson/play/:id">
+      <AppRoute exact path="/portal/lesson/play/:id">
         <LessonReplay />
       </AppRoute>
 
-      <AppRoute exact path="/kafka/lesson/record/:id">
+      <AppRoute exact path="/portal/lesson/record/:id">
         <LessonRecord />
       </AppRoute>
 
