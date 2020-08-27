@@ -200,10 +200,10 @@ const BoardEdit = (props: Props) => {
             inputRef={register}
             name="category"
             value={board?.category}
-            inputProps={{
-              name: "age",
-              id: "age-native-helper",
-            }}
+            // inputProps={{
+            //   name: "age",
+            //   id: "age-native-helper",
+            // }}
           >
             <option aria-label="None" value="" />
             <option value={75}>javascript</option>

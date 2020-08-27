@@ -50,7 +50,7 @@ export const initialState: InitialState = {
 };
 
 interface ColumnsResponse extends IColumn {
-  tasks: ITask[];
+  lessons: ITask[];
 }
 
 interface BoardDetailResponse extends Board {
