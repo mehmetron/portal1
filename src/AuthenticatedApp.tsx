@@ -8,7 +8,11 @@ import BoardEdit from "./features/board/BoardEdit";
 import Navbar from "./components/Navbar";
 import Home from "./features/home/Home";
 import BoardBar from "./features/board/BoardBar";
-import LessonPage from "./features/lesson/LessonPage";
+import EnrolledList from "./features/enrolled/EnrolledList"
+
+import Settings from "./features/settings/Settings"
+
+// import LessonPage from "./features/lesson/LessonPage";
 import LessonReplay from "./features/lesson/LessonReplay";
 import LessonRecord from "./features/lesson/LessonRecord";
 // import Profile from "./features/profile/Profile";
@@ -60,6 +64,11 @@ const AuthenticatedApp = () => {
       <AppRoute exact path="/portal/boards">
         <BoardList />
       </AppRoute>
+
+        <AppRoute exact path="/portal/enrolled">
+            <EnrolledList />
+        </AppRoute>
+
       <AppRoute exact path="/portal/b/:id">
         <BoardBar />
         <Board />
@@ -73,9 +82,11 @@ const AuthenticatedApp = () => {
         <Home />
       </AppRoute>
 
-      <AppRoute exact path="/portal/lesson">
-        <LessonPage />
+      <AppRoute exact path="/portal/settings">
+        <Settings />
       </AppRoute>
+
+
 
       <AppRoute exact path="/portal/lesson/play/:id">
         <LessonReplay />

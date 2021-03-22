@@ -58,6 +58,7 @@ const RightMargin = styled.div`
 
 const Board = () => {
   const detail = useSelector((state: RootState) => state.board.detail);
+  console.log("what is detail ", detail)
   const error = useSelector((state: RootState) => state.board.detailError);
   const columns = useSelector(columnSelectors.selectAll);
   const tasksByColumn = useSelector((state: RootState) => state.task.byColumn);

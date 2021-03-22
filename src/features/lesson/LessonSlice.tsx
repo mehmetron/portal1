@@ -1,10 +1,11 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 // import { Board, IColumn, ITask, Label, NanoBoard } from "../../types";
-import api, { API_COURSES } from "../../api";
+import api, { API_LESSONS } from "../../api";
+import {Id, ITask, PriorityValue} from "../../types";
 
 interface InitialState {
-  detail: TASK | null;
-  all: TASK[];
+  detail: ITask | null;
+  all: ITask[];
   fetchLoading: boolean;
   fetchError: string | null;
   createDialogOpen: boolean;
@@ -50,22 +51,22 @@ export const fetchAllLessons = createAsyncThunk<TASK[]>(
 );
 
 export const fetchLessonById = createAsyncThunk<
-  TASK,
-  string,
-  {
-    rejectValue: string;
-  }
->("lesson/fetchByIdStatus", async (id, { rejectWithValue }) => {
+    ITask,
+    string,
+    {
+      rejectValue: string;
+    }
+    >("lesson/fetchByIdStatus", async (id, { rejectWithValue }) => {
   try {
-    const response = await api.get(
-      `https://jsonplaceholder.typicode.com/todos/${id}/`
-    );
+    const response = await api.get(`${API_LESSONS}${id}/`);
     console.log("lesson by id: ", response);
     return response.data;
   } catch (err) {
     return rejectWithValue(err.message);
   }
 });
+
+
 
 export const slice = createSlice({
   name: "lesson",
@@ -82,6 +83,7 @@ export const slice = createSlice({
       //   state.detailError = undefined;
     });
     builder.addCase(fetchAllLessons.fulfilled, (state, action) => {
+      // @ts-ignore
       state.all = action.payload;
       state.fetchError = null;
       state.fetchLoading = false;
@@ -94,12 +96,13 @@ export const slice = createSlice({
       state.detailLoading = true;
     });
     builder.addCase(fetchLessonById.fulfilled, (state, action) => {
-      const { id, title, completed, userId } = action.payload;
-      state.detail = { id, title, completed, userId };
+      const { id, created, modified, title, description, labels, video_url, recording, priority } = action.payload;
+      state.detail = { id, created, modified, title, description, labels, video_url, recording, priority };
       state.detailError = undefined;
       state.detailLoading = false;
     });
     builder.addCase(fetchLessonById.rejected, (state, action) => {
+      // @ts-ignore
       state.detailError = action.payload;
       state.detailLoading = false;
     });

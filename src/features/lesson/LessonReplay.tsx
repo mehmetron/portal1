@@ -4,6 +4,8 @@ import { useParams, useHistory } from "react-router-dom";
 
 import { fetchLessonById } from "./LessonSlice";
 import { RootState } from "../../store";
+import SimpleModal from "./SimpleModal";
+
 
 interface Props {}
 
@@ -26,6 +28,7 @@ const LessonReplay = (props: Props) => {
       <button type="button" onClick={() => history.goBack()}>
         Back
       </button>
+        <SimpleModal />
       <p>ID: {id}</p>
       {taskById[id] && <p>DATA: {JSON.stringify(taskById[id].recording)}</p>}
       <div style={{ padding: "40px", backgroundColor: "red" }}>f</div>

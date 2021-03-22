@@ -15,14 +15,16 @@ const Container = styled.div`
   margin: ${grid / 2}px;
   display: flex;
   flex-direction: column;
-  border-top: 3px solid ${PRIMARY};
+  //border-top: 3px solid ${PRIMARY};
+  border-radius: 10px;
 `;
 
 const Header = styled.div<{ isDragging: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${COLUMN_COLOR};
+  background-color: #3F50B5;
+  border-radius: 10px;
   transition: background-color 0.2s ease;
   [data-rbd-drag-handle-context-id="0"] {
     cursor: initial;

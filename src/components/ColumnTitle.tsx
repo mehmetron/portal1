@@ -11,12 +11,20 @@ import { patchColumn, deleteColumn } from "../features/column/ColumnSlice";
 import { css } from "@emotion/core";
 
 const Container = styled.h4`
+
+  //background-color: #072885;
+  //color: white;
+  //padding: 5px;
+  //borderRadius: 4;
+  //alignItems: 'center';
+  //borderRadius: 4;
+  
   padding: ${grid}px;
   transition: background-color ease 0.2s;
   flex-grow: 1;
   user-select: none;
   position: relative;
-  color: ${PRIMARY};
+  color: white; //${PRIMARY};
   font-size: 1rem;
   font-weight: bold;
   margin: 0;

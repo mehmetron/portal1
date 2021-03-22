@@ -6,6 +6,8 @@ import axios from "axios";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
 axios.defaults.xsrfCookieName = "csrftoken";
 
+console.log("document cookie: ", document.cookie);
+
 export const setupInterceptors = (store: any) => {
   axios.interceptors.response.use(
     (response) => response,

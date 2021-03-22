@@ -12,7 +12,6 @@ import { avatarStyles } from "../../styles";
 import { currentBoardOwner } from "./BoardSlice";
 import CreateTaskDialog from "../task/CreateTaskDialog";
 import EditTaskDialog from "../task/EditTaskDialog";
-import { Button } from "@material-ui/core";
 import { PRIMARY } from "../../utils/colors";
 import { addColumn } from "../column/ColumnSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -20,6 +19,11 @@ import { faColumns, faCog } from "@fortawesome/free-solid-svg-icons";
 // import { setDialogOpen } from "../label/LabelSlice";
 // import LabelDialog from "../label/LabelDialog";
 import { useParams, useHistory } from "react-router-dom";
+import { Grid, Typography, Button } from '@material-ui/core';
+
+import PlaylistAddRoundedIcon from '@material-ui/icons/PlaylistAddRounded';
+import EditRoundedIcon from '@material-ui/icons/EditRounded';
+
 // import { selectAllMembers, setMemberListOpen } from "../member/MemberSlice";
 // import MemberListDialog from "../member/MemberList";
 
@@ -35,9 +39,10 @@ const Container = styled.div`
 const Items = styled.div`
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  overflow-x: scroll;
+  //overflow-x: scroll;
 `;
 
 const Left = styled.div`
@@ -86,6 +91,7 @@ const BoardBar = () => {
 
   return (
     <Container>
+
       <Items>
         {/* <Left>
           <Name>{detail.name}</Name>
@@ -118,42 +124,84 @@ const BoardBar = () => {
           </AvatarGroup>
           {boardOwner && <MemberInvite boardId={detail.id} />}
         </Left> */}
+
+        {/*<Right>*/}
+        {/*  /!* <Button*/}
+        {/*    size="small"*/}
+        {/*    css={css`*/}
+        {/*      ${buttonStyles}*/}
+        {/*      margin-right: 0.5rem;*/}
+        {/*    `}*/}
+        {/*    onClick={handleEditLabels}*/}
+        {/*    startIcon={<FontAwesomeIcon icon={faCog} />}*/}
+        {/*    data-testid="open-labels-dialog"*/}
+        {/*  >*/}
+        {/*    Edit labels*/}
+        {/*  </Button> *!/*/}
+        {/*  <Button*/}
+        {/*    size="small"*/}
+        {/*    css={css`*/}
+        {/*      ${buttonStyles}*/}
+        {/*    `}*/}
+        {/*    onClick={handleAddColumn}*/}
+        {/*    startIcon={<FontAwesomeIcon icon={faColumns} />}*/}
+        {/*    data-testid="add-col"*/}
+        {/*  >*/}
+        {/*    Add List*/}
+        {/*  </Button>*/}
+        {/*  <Button*/}
+        {/*    size="small"*/}
+        {/*    css={css`*/}
+        {/*      ${buttonStyles}*/}
+        {/*    `}*/}
+        {/*    onClick={() => history.push(`/portal/b/${id}/edit`)}*/}
+        {/*    startIcon={<FontAwesomeIcon icon={faColumns} />}*/}
+        {/*    data-testid="add-col"*/}
+        {/*  >*/}
+        {/*    Edit Course*/}
+        {/*  </Button>*/}
+        {/*</Right>*/}
+
+
         <Right>
-          {/* <Button
-            size="small"
-            css={css`
-              ${buttonStyles}
-              margin-right: 0.5rem;
-            `}
-            onClick={handleEditLabels}
-            startIcon={<FontAwesomeIcon icon={faCog} />}
-            data-testid="open-labels-dialog"
-          >
-            Edit labels
-          </Button> */}
-          <Button
-            size="small"
-            css={css`
-              ${buttonStyles}
-            `}
-            onClick={handleAddColumn}
-            startIcon={<FontAwesomeIcon icon={faColumns} />}
-            data-testid="add-col"
-          >
-            Add List
-          </Button>
-          <Button
-            size="small"
-            css={css`
-              ${buttonStyles}
-            `}
-            onClick={() => history.push(`/portal/b/${id}/edit`)}
-            startIcon={<FontAwesomeIcon icon={faColumns} />}
-            data-testid="add-col"
-          >
-            Edit Course
-          </Button>
+          <div>
+            {/*<Typography*/}
+            {/*    component="h2"*/}
+            {/*    variant="overline"*/}
+            {/*>*/}
+            {/*  Organization*/}
+            {/*</Typography>*/}
+            <Typography
+                component="h3"
+                variant="h5"
+            >
+              Course Dashboard
+            </Typography>
+          </div>
         </Right>
+        <Left>
+          <div>
+            <Button
+                color="primary"
+                onClick={handleAddColumn}
+                variant="contained"
+                size="small"
+                startIcon={<PlaylistAddRoundedIcon />}
+            >
+              Add list
+            </Button>
+            {" "}
+            <Button
+                color="primary"
+                onClick={() => history.push(`/portal/b/${id}/edit`)}
+                variant="contained"
+                size="small"
+                startIcon={<EditRoundedIcon />}
+            >
+              Edit Course
+            </Button>
+          </div>
+        </Left>
       </Items>
       {/* <MemberDialog board={detail} />
       <MemberListDialog /> */}

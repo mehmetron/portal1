@@ -31,6 +31,7 @@ const Wrapper = styled.div<{
 }>`
   background-color: ${(props) =>
     getBackgroundColor(props.isDraggingOver, props.isDraggingFrom)};
+  border-radius: 0px 0px 10px 10px;
   display: flex;
   flex-direction: column;
   padding: ${grid}px;

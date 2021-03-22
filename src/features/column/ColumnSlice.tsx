@@ -14,7 +14,7 @@ export const addColumn = createAsyncThunk<IColumn, number>(
   async (boardId) => {
     console.log("trying to create column", boardId);
     const response = await api.post(`${API_COLUMNS}`, {
-      board: boardId,
+      course: boardId,
       title: "new column",
       tasks: [],
     });
@@ -102,6 +102,7 @@ export const updateColumns = (columns: IColumn[]): AppThunk => async (
   const previousColumns = selectAllColumns(getState());
   try {
     dispatch(setColumns(columns));
+    console.log(columns.map((col) => col.id));
     await api.post(API_SORT_COLUMNS, {
       order: columns.map((col) => col.id),
     });

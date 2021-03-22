@@ -8,6 +8,7 @@ export const fetchCurrentUser = createAsyncThunk<CurrentUser>(
   async () => {
     const response = await api.get(API_CURRENT_USER);
     console.log("rep user", response);
+    console.log("document cookie: ", document.cookie);
     return response.data;
   }
 );

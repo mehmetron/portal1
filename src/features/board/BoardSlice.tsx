@@ -75,6 +75,7 @@ export const fetchBoardById = createAsyncThunk<
 >("board/fetchByIdStatus", async (id, { rejectWithValue }) => {
   try {
     const response = await api.get(`${API_COURSES}${id}/`);
+    console.log("fetched board by id: ", response);
     return response.data;
   } catch (err) {
     return rejectWithValue(err.message);
