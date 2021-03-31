@@ -7,10 +7,9 @@ import {
   createSuccessToast,
   createInfoToast,
 } from "../toast/ToastSlice";
-import api, { API_SORT_TASKS, API_LESSONS } from "../../api";
+import api, { API_SORT_TASKS, API_LESSONS, API_AUDIO_LESSONS } from "../../api";
 import { addColumn, deleteColumn } from "../column/ColumnSlice";
 import { deleteLabel } from "../label/LabelSlice";
-// import { removeBoardMember } from "../member/MemberSlice";
 
 type TasksById = Record<string, ITask>;
 
@@ -39,7 +38,8 @@ interface PatchFields {
   labels: Id[];
   video_url: string;
   recording: string;
-  // assignees: Id[];
+  audio: string;
+  audioblob: string;
 }
 
 export const patchTask = createAsyncThunk<
@@ -47,6 +47,14 @@ export const patchTask = createAsyncThunk<
   { id: Id; fields: Partial<PatchFields> }
 >("task/patchTaskStatus", async ({ id, fields }) => {
   const response = await api.patch(`${API_LESSONS}${id}/`, fields);
+  return response.data;
+});
+
+export const updateAudio = createAsyncThunk<
+  ITask,
+  { id: Id; fields: Partial<PatchFields> }
+>("task/updateAudioStatus", async ({ id, fields }) => {
+  const response = await api.patch(`${API_AUDIO_LESSONS}${id}/`, fields);
   return response.data;
 });
 
@@ -112,6 +120,9 @@ export const slice = createSlice({
     builder.addCase(patchTask.fulfilled, (state, action) => {
       state.byId[action.payload.id] = action.payload;
     });
+    builder.addCase(updateAudio.fulfilled, (state, action) => {
+      state.byId[action.payload.id] = action.payload;
+    });
     builder.addCase(createTask.pending, (state) => {
       state.createLoading = true;
     });
@@ -149,15 +160,6 @@ export const slice = createSlice({
         );
       }
     });
-    // builder.addCase(removeBoardMember, (state, action) => {
-    //   const deletedMemberId = action.payload;
-    //   for (const taskId in state.byId) {
-    //     const task = state.byId[taskId];
-    //     task.assignees = task.assignees.filter(
-    //       (assigneeId) => assigneeId !== deletedMemberId
-    //     );
-    //   }
-    // });
   },
 });
 

@@ -38,7 +38,6 @@ import { Autocomplete } from "@material-ui/lab";
 import { createMdEditorStyles, descriptionStyles } from "../../styles";
 import MarkdownIt from "markdown-it";
 import MdEditor from "react-markdown-editor-lite";
-// import TaskAssignees from "./TaskAssignees";
 import {
   MD_EDITOR_PLUGINS,
   borderRadius,
@@ -179,7 +178,6 @@ const EditTaskDialog = () => {
   const [description, setDescription] = useState("");
   const [editingDescription, setEditingDescription] = useState(false);
   const [video_url, setVideo_url] = useState<string>("");
-  // const [recorded, setRecorded] = useState(false);
 
   const titleTextAreaRef = useRef<HTMLTextAreaElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -194,10 +192,6 @@ const EditTaskDialog = () => {
       setTitle(tasksById[taskId].title);
       setVideo_url(tasksById[taskId].video_url);
 
-      // if (tasksById[taskId].recording.length > 1) {
-      //   console.log("taskId somesay", taskId);
-      //   setRecorded(true);
-      // }
     }
   }, [open, taskId]);
 
@@ -459,7 +453,6 @@ const EditTaskDialog = () => {
           </Description>
         </Main>
         <Side theme={theme}>
-          {/* <TaskAssignees task={task} /> */}
           <Autocomplete
             id="column-select"
             size="small"

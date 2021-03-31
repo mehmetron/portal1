@@ -1,11 +1,11 @@
 import React from "react";
-import {Drawer, List, Hidden, Tooltip, ListItem, Avatar, CardContent} from "@material-ui/core";
+import {Drawer, List, Hidden, Tooltip, ListItem, Avatar, CardContent, Typography, Button} from "@material-ui/core";
 import { css } from "@emotion/core";
 import { sidebarWidth } from "../../const";
 import styled from "@emotion/styled";
-import { ReactComponent as Logo } from "../../static/svg/logo.svg";
+import { ReactComponent as Logo } from "../../static/svg/sticstack.svg";
 import { ReactComponent as GitHubIcon } from "../../static/svg/github.svg";
-import { NavLink, useHistory } from "react-router-dom";
+import {Link, NavLink, useHistory} from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   mobileDrawerOpen,
@@ -15,6 +15,8 @@ import UserMenu from "../../components/UserMenu";
 import { fetchCurrentUser } from "./SidebarSlice";
 import { RootState } from "../../store";
 import { DN90, T50, DN40 } from "../../utils/colors";
+
+import ArrowBackIosRoundedIcon from '@material-ui/icons/ArrowBackIosRounded';
 
 
 
@@ -119,26 +121,25 @@ const DrawerContent = () => {
     <Container>
       <TopArea>
         <div>
-          <img
-            css={css`
-              height: 20px;
-              &:hover {
-                cursor: pointer;
-              }
-            `}
-            onClick={() => history.push("/")}
-            src="https://tailwindui.com/img/logos/workflow-logo-on-dark.svg"
-            alt="Workflow logo"
-          />
 
-          {/* <Logo
-            css={css`
-              &:hover {
-                cursor: pointer;
-              }
-            `}
-            onClick={() => history.push("/")}
-          /> */}
+          <Tooltip title="Leave Portal">
+            <a href="/" target="_self" rel="noopener noreferrer" >
+              <Logo
+                css={css`
+                  &:hover {
+                    cursor: pointer;
+                  }
+                `}
+                // onClick={() => history.push("/")}
+              />
+            </a>
+          </Tooltip>
+
+          <div style={{color: "white"}}>_____________</div>
+          <a href="/" target="_self" rel="noopener noreferrer" css={linkStyles}>
+            Leave Portal
+          </a>
+
         </div>
       </TopArea>
 
@@ -161,26 +162,9 @@ const DrawerContent = () => {
         <NavLink to="/portal/enrolled/" exact css={linkStyles}>
           Enrolled
         </NavLink>
-        <NavLink to="/portal/settings/" exact css={linkStyles}>
-          Settings
-        </NavLink>
 
-
-        {/* <NavLink to="/portal/profile/" exact css={linkStyles}>
-          Profile
-        </NavLink> */}
       </List>
-      {/* <BottomBlock>
-        <Tooltip title="View GitHub Repo">
-          <GithubLink
-            href="https://github.com/rrebase/knboard"
-            target="_blank"
-            rel="noopener"
-          >
-            <GitHubIcon />
-          </GithubLink>
-        </Tooltip>
-      </BottomBlock> */}
+
     </Container>
   );
 };

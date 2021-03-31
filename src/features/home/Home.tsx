@@ -4,7 +4,7 @@ import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import styled from "@emotion/styled";
 import { css } from "@emotion/core";
-
+import { useSelector, useDispatch } from "react-redux";
 
 import {
   Container,
@@ -13,32 +13,12 @@ import {
   Typography,
   Hidden
 } from '@material-ui/core';
-import BarChartRoundedIcon from '@material-ui/icons/BarChartRounded';
 import MenuBookRoundedIcon from '@material-ui/icons/MenuBookRounded';
 import CodeRoundedIcon from '@material-ui/icons/CodeRounded';
+import {RootState} from "../../store";
+import {fetchCurrentUser} from "../sidebar/SidebarSlice";
 
 
-const ContainerH = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const Enrolled = styled.div`
-  background-color: gray;
-  color: white;
-  font-size: 24px;
-  border-radius: 4px;
-  padding: 10px;
-`;
-
-const Instruct = styled.div`
-  background-color: green;
-  color: white;
-  font-size: 24px;
-  border-radius: 4px;
-  padding: 10px;
-`;
 
 const GridH = styled.div`
   display: flex;
@@ -58,6 +38,14 @@ const useStyles = makeStyles((theme) => ({
 const Home = () => {
   const classes = useStyles();
 
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(fetchCurrentUser());
+  }, []);
+
+  const currentUser = useSelector((state: RootState) => state.sidebar.user);
+
   return (
     <React.Fragment>
       <div style={{ margin: 50 }}></div>
@@ -65,15 +53,15 @@ const Home = () => {
       <Grid alignItems="center" container justify="space-between" spacing={3}>
         <Grid item md={6} xs={12}>
           <Typography component="h2" gutterBottom variant="overline">
-            Home
+            Portal
           </Typography>
           <Typography component="h1" gutterBottom variant="h3">
-            Good Morning,
-            curious wanderer
+            Welcome back {" "}
+            {currentUser && currentUser.username.charAt(0).toUpperCase() + currentUser.username.slice(1)}!
             {/* {session.user.first_name} */}
           </Typography>
           <Typography gutterBottom variant="subtitle1">
-            Hey! You're back. Let's get to work!
+            beep boop beep
           </Typography>
 
         </Grid>

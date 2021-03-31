@@ -23,24 +23,26 @@ export const setupInterceptors = (store: any) => {
 };
 
 // Available endpoints
-export const API_LOGIN = "/portal/accounts/login/";
-export const API_LOGOUT = "/portal/accounts/logout/";
-export const API_REGISTER = "/portal/auth/registration/";
+// export const API_LOGIN = "/portal/accounts/login/";
+// export const API_LOGOUT = "/portal/accounts/logout/";
+// export const API_REGISTER = "/portal/auth/registration/";
 // export const API_LOGIN = "/portal/auth/login/";
 // export const API_LOGOUT = "/portal/auth/logout/";
 // export const API_REGISTER = "/portal/auth/registration/";
-export const API_GUEST_REGISTER = "/portal/auth/guest/";
-export const API_AUTH_SETUP = "/portal/auth/setup/";
+// export const API_GUEST_REGISTER = "/portal/auth/guest/";
+// export const API_AUTH_SETUP = "/portal/auth/setup/";
 
-export const API_AVATARS = "/portal/api/avatars/";
+// export const API_AVATARS = "/portal/api/avatars/";
 export const API_COURSES = "/portal/api/courses/";
 export const API_COLUMNS = "/portal/api/columns/";
 export const API_LESSONS = "/portal/api/lessons/";
+export const API_AUDIO_LESSONS = "/portal/api/lessonsaudio/";
 export const API_LABELS = "/portal/api/labels/";
 export const API_SORT_COLUMNS = "/portal/api/sort/column/";
 export const API_SORT_TASKS = "/portal/api/sort/task/";
 export const API_USERS = "/portal/api/users/";
 export const API_SEARCH_USERS = "/portal/api/u/search/";
+export const API_ENROLLED_COURSES = "/portal/api/enrolled/courses";
 // Get current user
 export const API_CURRENT_USER = "/portal/api/currentuser/";
 

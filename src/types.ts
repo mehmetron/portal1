@@ -24,6 +24,19 @@ export interface NanoBoard {
   owner: Id;
 }
 
+interface Course {
+  id: Id;
+  name: string;
+}
+
+export interface EnrolledBoard {
+  user: number;
+  course: Course;
+  createdBy: string;
+}
+
+
+
 export interface ICategory {
   id: number;
   title: string;
@@ -67,6 +80,8 @@ export interface ITask {
   // assignees: Id[];
   video_url: string;
   recording: string;
+  audio: string;
+  audioblob: string;
   priority: PriorityValue;
 }
 

@@ -13,6 +13,7 @@ import lessonReducer from "./features/lesson/LessonSlice";
 // import memberReducer from "./features/member/MemberSlice";
 import responsiveReducer from "./features/responsive/ResponsiveSlice";
 import sidebarReducer from "./features/sidebar/SidebarSlice";
+import enrolledReducer from "./features/enrolled/EnrolledSlice"
 
 // import authInitialState from "./features/auth/AuthSlice";
 import { setupInterceptors } from "./api";
@@ -29,6 +30,7 @@ export const rootReducer = combineReducers({
   label: labelReducer,
   responsive: responsiveReducer,
   sidebar: sidebarReducer,
+  enrolled: enrolledReducer,
 });
 
 const store = configureStore({

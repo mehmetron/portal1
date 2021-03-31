@@ -15,7 +15,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-const PageError = ({ children }: Props) => (
+const PageError2 = ({ children }: Props) => (
   <Container>
     <Alert severity="warning" variant="outlined">
       {children}
@@ -23,4 +23,4 @@ const PageError = ({ children }: Props) => (
   </Container>
 );
 
-export default PageError;
+export default PageError2;

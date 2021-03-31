@@ -24,6 +24,7 @@ const useStyles = makeStyles({
 
 interface Props {
     onSave: () => ((event: React.MouseEvent<SVGSVGElement, MouseEvent>) => void) | undefined;
+    record: () => ((event: React.MouseEvent<SVGSVGElement, MouseEvent>) => void) | undefined;
 }
 
 export default function RecordingFooter(props: Props) {
@@ -41,7 +42,7 @@ export default function RecordingFooter(props: Props) {
             className={classes.root}
         >
             <BottomNavigationAction label="Back" icon={<ArrowLeftRoundedIcon color="primary" fontSize="large" onClick={() => history.goBack()}/>} />
-            <BottomNavigationAction label="Record" icon={<AlbumIcon color="primary"/>} />
+            <BottomNavigationAction label="Record" icon={<AlbumIcon color="primary" onClick={()=>props.record()}/>} />
             <BottomNavigationAction label="Mic" icon={<MicRoundedIcon color="primary"/>} />
             <BottomNavigationAction label="Play" icon={<PlayArrowRoundedIcon color="primary" onClick={()=>props.onSave()}/>} />
         </BottomNavigation>

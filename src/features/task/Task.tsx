@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { ITask } from "../../types";
-// import { ITask, BoardMember } from "../../types";
 import {
   DraggableProvided,
   Draggable,
@@ -10,16 +9,12 @@ import {
 import { N30, N0, N70, PRIMARY } from "../../utils/colors";
 import { PRIO_COLORS } from "../../const";
 import { taskContainerStyles } from "../../styles";
-import { AvatarGroup } from "@material-ui/lab";
-import { css } from "@emotion/core";
-import { useSelector, useDispatch } from "react-redux";
-import { Avatar } from "@material-ui/core";
+
+import { useDispatch } from "react-redux";
 import { setEditDialogOpen } from "./TaskSlice";
 import TaskLabels from "./TaskLabels";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCube } from "@fortawesome/free-solid-svg-icons";
-// import { selectMembersEntities } from "../member/MemberSlice";
-import Flex from "../../components/Flex";
+
+
 
 const getBackgroundColor = (isDragging: boolean, isGroupedOver: boolean) => {
   if (isDragging) {
@@ -93,7 +88,6 @@ const TaskId = styled.small`
   font-size: 8px;
 `;
 
-// const Assignees = styled.div``;
 
 const getStyle = (provided: DraggableProvided, style?: Record<string, any>) => {
   if (!style) {
@@ -106,52 +100,7 @@ const getStyle = (provided: DraggableProvided, style?: Record<string, any>) => {
   };
 };
 
-export const TaskFooter = ({ task }: { task: ITask }) => {
-  // const membersByIds = useSelector(selectMembersEntities);
-  // const assignees = task.assignees.map(
-  //   (assigneeId) => membersByIds[assigneeId]
-  // ) as BoardMember[];
 
-  return (
-    <Footer>
-      <CardIcon data-testid="task-priority">
-        <FontAwesomeIcon icon={faCube} color={PRIO_COLORS[task.priority]} />
-      </CardIcon>
-      {/* {assignees.length > 0 && (
-        <Assignees>
-          <AvatarGroup
-            max={3}
-            css={css`
-              & .MuiAvatarGroup-avatar {
-                height: 1.25rem;
-                width: 1.25rem;
-                font-size: 8px;
-                margin-left: -4px;
-                border: none;
-              }
-            `}
-          >
-            {assignees.map((assignee) => (
-              <Avatar
-                key={assignee.id}
-                css={css`
-                  height: 1.25rem;
-                  width: 1.25rem;
-                  font-size: 8px;
-                  margin-left: -12px;
-                `}
-                src={assignee.avatar?.photo}
-                alt={assignee.avatar?.name}
-              >
-                {assignee.username.charAt(0)}
-              </Avatar>
-            ))}
-          </AvatarGroup>
-        </Assignees>
-      )} */}
-    </Footer>
-  );
-};
 
 interface Props {
   task: ITask;
@@ -192,7 +141,6 @@ const Task = ({ task: task, style, index }: Props) => {
 
             <TaskLabels task={task} />
 
-            {/* <TaskFooter task={task} /> */}
           </Content>
         </Container>
       )}

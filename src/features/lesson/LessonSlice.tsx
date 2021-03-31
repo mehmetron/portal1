@@ -96,8 +96,9 @@ export const slice = createSlice({
       state.detailLoading = true;
     });
     builder.addCase(fetchLessonById.fulfilled, (state, action) => {
-      const { id, created, modified, title, description, labels, video_url, recording, priority } = action.payload;
-      state.detail = { id, created, modified, title, description, labels, video_url, recording, priority };
+      console.log("this is the payload ", action.payload)
+      const { id, created, modified, title, description, labels, video_url, recording, audio, audioblob, priority } = action.payload;
+      state.detail = { id, created, modified, title, description, labels, video_url, recording, audio, audioblob, priority };
       state.detailError = undefined;
       state.detailLoading = false;
     });

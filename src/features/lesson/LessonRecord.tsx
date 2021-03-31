@@ -4,12 +4,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import { TextField } from "@material-ui/core";
+import { ReactComponent as TimesIcon } from "../../static/svg/times.svg";
 
 import { fetchLessonById } from "./LessonSlice";
 import { RootState } from "../../store";
-import { patchTask } from "../task/TaskSlice";
-import { StyledEditor } from "../Editor/Editor.tsx";
+import { patchTask, updateAudio } from "../task/TaskSlice";
+import { StyledEditor } from "../Editor/StyledEditor.tsx";
 import SimpleBottomNavigation from "./recordingFooter";
+import useRecorder from "./useRecorder"
 
 import * as rrweb from "rrweb";
 import RecordingFooter from "./recordingFooter";
@@ -19,27 +21,27 @@ interface Props {}
 const LessonRecord = (props: Props) => {
   const dispatch = useDispatch();
 
-  const [recording, setRecording] = useState();
   const [events, setEvents] = useState([]);
 
   const taskById = useSelector((state: RootState) => state.task.byId);
 
 
 
-
     let { id } = useParams();
 
-    useEffect(() => {
-        rrweb.record({
-            emit(event) {
-                // push event into the events array
-                setEvents(events => events.concat(event));
-            }
-        });
-        // audiorec();
-    }, []);
+    // useEffect(() => {
+    //     rrweb.record({
+    //         emit(event) {
+    //             // push event into the events array
+    //             setEvents(events => events.concat(event));
+    //         }
+    //     });
+    //     // audiorec();
+    // }, []);
 
-    const audioRef = useRef();
+
+
+    // const audioRef = useRef();
 
     // function audiorec() {
     //     (async () => {
@@ -49,17 +51,29 @@ const LessonRecord = (props: Props) => {
     // }
 
 
+    let [blob, audioURL, isRecording, startRecording, stopRecording] = useRecorder();
+
+    // function stopAndSave() {
+    //     stopRecording()
+    //
+    //     let body = JSON.stringify({ audioURL })
+    //     dispatch(patchTask({ id: id, fields: { audio: body } }));
+    //
+    // }
+
     // this function will send events to the backend and reset the events array
     function save() {
+
+        stopRecording()
+
+
         console.log("1", events);
         const body = JSON.stringify({ events });
         console.log("2", body)
-        setRecording(events)
         console.log("3", events)
 
-
         if (id) {
-            dispatch(patchTask({ id: id, fields: { recording: body } }));
+            dispatch(patchTask({ id: id, fields: { recording: body} }));
         }
 
         // (async () => {
@@ -155,7 +169,16 @@ const LessonRecord = (props: Props) => {
 
 
 
+    function record() {
+        rrweb.record({
+            emit(event) {
+                // push event into the events array
+                setEvents(events => events.concat(event));
+            }
+        });
+        startRecording()
 
+    }
 
 
 
@@ -165,14 +188,50 @@ const LessonRecord = (props: Props) => {
     }
   }, [id]);
 
+
+
+
+    React.useEffect(() => {
+
+        // dispatch(updateAudio({id: id, fields: {audioblob: JSON.stringify({blob})}}));
+
+        setTimeout(() => {
+            const reader = new FileReader();
+            reader.readAsDataURL(blob);
+            reader.onload = () => {
+                const base64AudioMessage = reader.result.split(",")[1];
+                const base64AudioMessage2 = base64AudioMessage.substring(2);
+
+                if (base64AudioMessage.length > 200) {
+                    dispatch(updateAudio({id: id, fields: {audioblob: reader.result}}));
+                    console.log("blob updated", blob)
+                    console.log("reader.result", reader.result)
+                    console.log("base64AudioMessage", base64AudioMessage)
+                    console.log("base64AudioMessage2", base64AudioMessage2)
+                }
+            }
+        }, 5000)
+
+        // var file = new File([blob], "name");
+        // dispatch(patchTask({id: id, fields: {audioblob: JSON.stringify(blob)}}));
+        // console.log("blob", blob)
+        // console.log("file blob updated", file)
+
+    }, [blob]);
+
+
     const myLesson = useSelector((state: RootState) => state.lesson.detail);
     console.log("this is myLesson: ", myLesson)
 
-  const handleSaveRecording = () => {
-    if (id) {
-      dispatch(patchTask({ id: id, fields: { recording } }));
-    }
-  };
+  // const handleSaveRecording = () => {
+  //   if (id) {
+  //     dispatch(patchTask({ id: id, fields: { recording } }));
+  //   }
+  // };
+
+
+    // console.log("my audio please work", audioURL)
+
 
   return (
     <div>
@@ -180,24 +239,17 @@ const LessonRecord = (props: Props) => {
 
         <StyledEditor />
 
-      {/*<TextField*/}
-      {/*  id="add-recording"*/}
-      {/*  data-testid="add-recording"*/}
-      {/*  label="Add Recording"*/}
-      {/*  value={recording}*/}
-      {/*  onChange={(e) => setRecording(e.target.value)}*/}
-      {/*  variant="outlined"*/}
-      {/*  placeholder="recording..."*/}
-      {/*  helperText="fake recording..."*/}
-      {/*  fullWidth*/}
-      {/*  size="small"*/}
-      {/*  onBlur={handleSaveRecording}*/}
-      {/*  error={false}*/}
-      {/*/>*/}
+        <div>
+            <audio id="myAudio" src={audioURL} controls />
+            <button onClick={startRecording} disabled={isRecording}>
+                start recording
+            </button>
+            <button onClick={stopRecording} disabled={!isRecording}>
+                stop recording
+            </button>
+        </div>
 
-      {/*<p>ID: {id}</p>*/}
-      {/*{taskById[id] && <p>DATA: {JSON.stringify(taskById[id].recording)}</p>}*/}
-      {/*<div style={{ padding: "40px", backgroundColor: "red" }}>f</div>*/}
+
 
 
 
@@ -210,7 +262,7 @@ const LessonRecord = (props: Props) => {
             </button>
 
         <hr></hr>
-        <RecordingFooter onSave={save}/>
+        <RecordingFooter onSave={save} record={record}/>
     </div>
   );
 };

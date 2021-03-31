@@ -71,12 +71,17 @@ const DEFAULT_JSX_OPTIONS = {
     viewportMargin: 99
 };
 
-export function StyledEditor(props: { options: any; }) {
-    const [state, setState] = useState(DEFAULT_JS_VALUE);
+export function StyledEditor(props: any) {
+    const [state, setState] = useState(props.code);
+    // console.log("this is state in stylededitor", state)
+    // console.log("this is props.code in stylededitor", props.code)
+
+    React.useEffect(() =>{
+        setState(props.code)
+    }, [props.code])
 
     const options = {
         ...DEFAULT_JSX_OPTIONS,
-        ...props.options
     };
 
     const onChange = (which: string) => (editor: any, data: any, value: any) => {
@@ -96,7 +101,7 @@ export function StyledEditor(props: { options: any; }) {
 }
 
 function PureEditor(props: { name: any; value: any; options: any; onChange: any; }) {
-    console.log(`rendering -> ${props.name}`);
+    // console.log(`rendering -> ${props.name}`);
     return (
         <CodeMirror
             value={props.value}

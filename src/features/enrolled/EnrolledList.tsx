@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Container, Grid, Tooltip } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllBoards } from "../board/BoardSlice";
+import { fetchAllEnrolled } from "./EnrolledSlice";
 import { RootState } from "../../store";
 import { css, SerializedStyles, keyframes } from "@emotion/core";
 import { Link } from "react-router-dom";
@@ -115,12 +115,12 @@ const Card = ({ cardCss, to, isOwner, children }: CardProps) => {
 
 export default function EnrolledList() {
     const dispatch = useDispatch();
-    const loading = useSelector((state: RootState) => state.board.fetchLoading);
-    const boards = useSelector((state: RootState) => state.board.all);
+    const loading = useSelector((state: RootState) => state.enrolled.fetchLoading);
+    const boards = useSelector((state: RootState) => state.enrolled.all);
     // const userId = useSelector((state: RootState) => state.auth.user?.id);
 
     React.useEffect(() => {
-        dispatch(fetchAllBoards());
+        dispatch(fetchAllEnrolled());
     }, []);
 
     if (loading && boards.length === 0) {
@@ -138,13 +138,13 @@ export default function EnrolledList() {
                     <Grid container spacing={2}>
                         {boards.map((board) => (
                             <Card
-                                key={board.id}
+                                key={board.course.id}
                                 cardCss={boardCardStyles}
-                                to={`/portal/b/${board.id}`}
+                                to={`/portal/b/${board.course.id}`}
                                 isOwner={true}
                                 // isOwner={board.owner === userId}
                             >
-                                {board.name}
+                                {board.course.name}
                             </Card>
                         ))}
 

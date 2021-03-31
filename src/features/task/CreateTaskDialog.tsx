@@ -28,12 +28,8 @@ import {
   MD_EDITOR_CONFIG,
   Key,
 } from "../../const";
-// import { selectAllMembers } from "../member/MemberSlice";
 import { Priority, Label } from "../../types";
-// import { Priority, BoardMember, Label } from "../../types";
 import { createMdEditorStyles } from "../../styles";
-import AvatarTag from "../../components/AvatarTag";
-import AvatarOption from "../../components/AvatarOption";
 import { selectAllLabels } from "../label/LabelSlice";
 import { getSaveShortcutLabel } from "../../utils/shortcuts";
 import LabelChip from "../../components/LabelChip";
@@ -71,7 +67,6 @@ const CreateTaskDialog = () => {
   const theme = useTheme();
   const dispatch = useDispatch();
   const labelsOptions = useSelector(selectAllLabels);
-  // const members = useSelector(selectAllMembers);
   const open = useSelector((state: RootState) => state.task.createDialogOpen);
   const columnId = useSelector(
     (state: RootState) => state.task.createDialogColumn
@@ -82,7 +77,6 @@ const CreateTaskDialog = () => {
   const [titleTouched, setTitleTouched] = useState<boolean>(false);
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
-  // const [assignees, setAssignees] = useState<BoardMember[]>([]);
   const [priority, setPriority] = useState<Priority | null>({
     value: "M",
     label: "Medium",
@@ -99,7 +93,6 @@ const CreateTaskDialog = () => {
       setTitleTouched(false);
       setTitle("");
       setDescription("");
-      // setAssignees([]);
       setPriority(PRIORITY_2);
       setLabels([]);
     }
@@ -121,7 +114,6 @@ const CreateTaskDialog = () => {
         description,
         column: columnId,
         labels: labels.map((l) => l.id),
-        // assignees: assignees.map((a) => a.id),
         priority: priority.value,
       };
       dispatch(createTask(newTask));
@@ -171,35 +163,7 @@ const CreateTaskDialog = () => {
           />
         </EditorWrapper>
 
-        {/* <Autocomplete
-          multiple
-          filterSelectedOptions
-          disableClearable
-          openOnFocus
-          id="create-assignee-select"
-          size="small"
-          options={members}
-          getOptionLabel={(option) => option.username}
-          value={assignees}
-          onChange={(_event, value) => setAssignees(value)}
-          renderOption={(option) => <AvatarOption option={option} />}
-          renderInput={(params) => (
-            <TextField {...params} label="Assignees" variant="outlined" />
-          )}
-          renderTags={(value, getTagProps) =>
-            value.map((option, index) => (
-              <AvatarTag
-                key={option.id}
-                option={option}
-                {...getTagProps({ index })}
-              />
-            ))
-          }
-          css={css`
-            width: 100%;
-            margin-top: 1rem;
-          `}
-        /> */}
+
 
         <Autocomplete
           id="create-priority-select"

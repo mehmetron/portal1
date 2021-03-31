@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, RouteProps, useLocation } from "react-router-dom";
+import { Switch, Route, RouteProps, useLocation, Redirect } from "react-router-dom";
 import styled from "@emotion/styled";
 
 import Board from "./features/board";
@@ -10,14 +10,12 @@ import Home from "./features/home/Home";
 import BoardBar from "./features/board/BoardBar";
 import EnrolledList from "./features/enrolled/EnrolledList"
 
-import Settings from "./features/settings/Settings"
 
-// import LessonPage from "./features/lesson/LessonPage";
 import LessonReplay from "./features/lesson/LessonReplay";
 import LessonRecord from "./features/lesson/LessonRecord";
 // import Profile from "./features/profile/Profile";
 import Sidebar from "./features/sidebar/Sidebar";
-// import PageError from "./components/PageError";
+// import PageError2 from "./components/PageError";
 import { sidebarWidth } from "./const";
 import { useTheme, WithTheme } from "@material-ui/core";
 
@@ -82,9 +80,7 @@ const AuthenticatedApp = () => {
         <Home />
       </AppRoute>
 
-      <AppRoute exact path="/portal/settings">
-        <Settings />
-      </AppRoute>
+
 
 
 
@@ -96,9 +92,10 @@ const AuthenticatedApp = () => {
         <LessonRecord />
       </AppRoute>
 
-      {/* <Route path="*">
-        <PageError>Page not found.</PageError>
-      </Route> */}
+      <Route path="/portal/*">
+          <Redirect to="/portal/home" />
+        {/*<PageError2>Page not found.</PageError2>*/}
+      </Route>
     </Switch>
   );
 };
